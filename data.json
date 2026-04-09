@@ -1,0 +1,33 @@
+{
+  "requests": [
+    {
+      "trackingNo": "TIB-2026-339275",
+      "docType": "Community Tax Certificate",
+      "purpose": "Loan / Credit Application",
+      "firstname": "sadasd",
+      "lastname": "asdas",
+      "dob": "",
+      "contactNumber": "asdas",
+      "email": "asdas",
+      "address": "asdasdas",
+      "pickupDate": "",
+      "smsOptIn": false,
+      "status": "Processing",
+      "createdAt": "2026-04-09T15:58:40.404Z",
+      "history": [
+        {
+          "status": "Received",
+          "note": "Request submitted",
+          "timestamp": "2026-04-09T15:58:40.405Z"
+        },
+        {
+          "status": "Processing",
+          "note": "",
+          "timestamp": "2026-04-09T15:59:18.570Z"
+        }
+      ]
+    }
+  ],
+  "registrations": [],
+  "complaints": []
+}

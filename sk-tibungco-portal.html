@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SK Tibungco — Official Portal | Sangguniang Kabataan ng Barangay Tibungco</title>
+<meta name="description" content="Official digital governance portal for the Sangguniang Kabataan of Barangay Tibungco, Davao City."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        teal:    { 50:'#e1f5ee', 100:'#9fe1cb', 200:'#5dcaa5', 400:'#1d9e75', 500:'#17856a', 600:'#0f6e56', 700:'#0a5a46', 800:'#085041', 900:'#04342c' },
+        gold:    { 50:'#fef9ea', 100:'#fdefc6', 200:'#fcd400', 300:'#f0c500', 400:'#d4a900', 500:'#b38e00', 600:'#8f7100', 700:'#705d00' },
+        navy:    { 50:'#e6eef8', 100:'#c2d4ed', 200:'#8db0da', 400:'#3c73b8', 600:'#1a4e8c', 700:'#0f3870', 800:'#082860', 900:'#04194a' },
+        crimson: { 50:'#fee7e7', 100:'#fbb7b7', 200:'#f47272', 400:'#e11d48', 600:'#9f0f2e', 700:'#7e0a24' },
+      },
+      fontFamily: { display: ['Plus Jakarta Sans','sans-serif'], body: ['DM Sans','sans-serif'] },
+    }
+  }
+}
+</script>
+<style>
+*{-webkit-font-smoothing:antialiased;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f4f9f8;color:#0a1f1b;margin:0}
+h1,h2,h3,h4,h5,.brand,.nav-lbl{font-family:'Plus Jakarta Sans',sans-serif}
+.msym{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:22px;line-height:1;display:inline-block;white-space:nowrap;direction:ltr;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+.msym.fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.page{display:none}
+.page.active{display:block;animation:fadeUp 0.35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.glass{backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(255,255,255,0.88);border-bottom:1px solid rgba(0,104,86,0.08)}
+.nav-link{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:.02em;color:#4a6b64;cursor:pointer;padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-link:hover{color:#0f6e56}
+.nav-link.active{color:#0f6e56;border-bottom-color:#1d9e75}
+.btn-teal{background:linear-gradient(135deg,#0f6e56 0%,#1d9e75 100%);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;transition:all .2s;border:none;cursor:pointer}
+.btn-teal:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(15,110,86,.28)}
+.btn-teal:active{transform:scale(0.97)}
+.btn-outline{background:transparent;border:2px solid #1d9e75;color:#0f6e56;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:#1d9e75;color:#fff}
+.card{background:#fff;border-radius:20px;border:1px solid rgba(0,104,86,0.07);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 40px -8px rgba(0,104,86,0.14)}
+.input-f{width:100%;background:#f4f9f8;border:1.5px solid #c8e3dc;border-radius:12px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:#0a1f1b;outline:none;transition:border-color .2s,box-shadow .2s}
+.input-f:focus{border-color:#1d9e75;box-shadow:0 0 0 3px rgba(29,158,117,.12)}
+.select-f{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230f6e56'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:20px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.badge-teal{background:#e1f5ee;color:#085041}
+.badge-gold{background:#fef9ea;color:#705d00}
+.badge-navy{background:#e6eef8;color:#0f3870}
+.badge-red{background:#fee7e7;color:#7e0a24}
+.badge-live{background:#fdefc6;color:#705d00;animation:pulse-badge 2s infinite}
+@keyframes pulse-badge{0%,100%{opacity:1}50%{opacity:.7}}
+.tag-cat{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:99px;font-size:.75rem;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .15s;font-family:'DM Sans',sans-serif}
+.tag-cat:hover:not(.selected){border-color:#1d9e75;color:#0f6e56}
+.tag-cat.selected{background:#0f6e56;color:#fff;border-color:#0f6e56}
+.stat-card{background:#fff;border-radius:16px;padding:20px 24px;border:1px solid rgba(0,104,86,0.07)}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;opacity:.18}
+.step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.8rem;flex-shrink:0;transition:all .3s}
+.step-done{background:#1d9e75;color:#fff}
+.step-active{background:#0f6e56;color:#fff;box-shadow:0 0 0 4px rgba(15,110,86,.2)}
+.step-idle{background:#e1f5ee;color:#085041;border:2px solid #9fe1cb}
+.timeline-dot{width:12px;height:12px;border-radius:50%;background:#1d9e75;flex-shrink:0;margin-top:4px}
+.officer-card{background:#fff;border-radius:18px;border:1px solid rgba(0,104,86,0.07);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.officer-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px -8px rgba(0,104,86,0.16)}
+.officer-avatar{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.4rem;color:#fff;margin:0 auto 12px}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4a6b64;font-family:'Plus Jakarta Sans',sans-serif}
+.progress-bar{height:10px;background:#e1f5ee;border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#0f6e56,#1d9e75);transition:width .8s ease}
+.req-status{padding:6px 14px;border-radius:99px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-family:'Plus Jakarta Sans',sans-serif}
+.status-pending{background:#fdefc6;color:#705d00}
+.status-processing{background:#e6eef8;color:#0f3870}
+.status-ready{background:#e1f5ee;color:#085041}
+.status-cancelled{background:#fee7e7;color:#7e0a24}
+.float-btn{position:fixed;bottom:24px;right:24px;z-index:50;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.accordion-content{display:none}
+.accordion-content.open{display:block;animation:fadeUp .2s ease}
+@media(max-width:768px){.hide-mobile{display:none!important}}
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- ===== TOP NAV ===== -->
+<nav class="fixed top-0 w-full z-50 glass">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 cursor-pointer flex-shrink-0" onclick="showPage('home')">
+      <!-- Barangay Tibungco SK Logo: encoded as inline SVG approximation using actual logo colors -->
+      <div class="relative w-11 h-11 flex-shrink-0">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%238B4513'/%3E%3Ccircle cx='50' cy='50' r='42' fill='%23D4A017'/%3E%3Ccircle cx='50' cy='50' r='34' fill='%23D4A017'/%3E%3Cellipse cx='50' cy='50' rx='26' ry='26' fill='%23FFD700'/%3E%3Cpath d='M38 60 Q42 44 50 38 Q58 44 62 60' fill='%230056b3'/%3E%3Cpath d='M62 60 Q56 44 50 38 Q56 52 58 60' fill='%23e11d48'/%3E%3Ccircle cx='50' cy='36' r='5' fill='%23e11d48'/%3E%3Cpath d='M50 36 L44 56 L56 56Z' fill='%23e11d48'/%3E%3C/svg%3E" alt="SK Tibungco Logo" class="w-11 h-11 rounded-full" onerror="this.style.display='none'"/>
+        <!-- Fallback badge if image fails -->
+        <div class="absolute inset-0 rounded-full bg-teal-600 flex items-center justify-center" style="display:none" id="logo-fallback">
+          <span class="text-white font-black text-xs">SK</span>
+        </div>
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="brand font-black text-teal-700 text-base tracking-tight">SK TIBUNGCO</span>
+        <span class="text-[9px] font-bold text-teal-500 uppercase tracking-[.14em] hide-mobile">Barangay Tibungco · Davao City</span>
+      </div>
+    </div>
+    <div class="hidden md:flex items-center gap-5 xl:gap-7">
+      <span class="nav-link active" id="nav-home" onclick="showPage('home')">Home</span>
+      <span class="nav-link" id="nav-about" onclick="showPage('about')">About Us</span>
+      <span class="nav-link" id="nav-services" onclick="showPage('services')">Services</span>
+      <span class="nav-link" id="nav-events" onclick="showPage('events')">Events</span>
+      <span class="nav-link" id="nav-programs" onclick="showPage('programs')">Programs</span>
+      <span class="nav-link" id="nav-reports" onclick="showPage('reports')">Transparency</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="hidden sm:flex items-center gap-1.5 text-sm font-bold text-teal-600 hover:text-teal-700 transition-colors" onclick="showPage('services')">
+        <span class="msym text-[18px]">account_circle</span> Log In
+      </button>
+      <button class="btn-teal px-4 py-2 rounded-full text-sm flex items-center gap-1.5" onclick="showDocRequest()">
+        <span class="msym text-[16px] fill">description</span>
+        <span class="hide-mobile">Request Doc</span>
+      </button>
+      <button class="md:hidden p-2 text-teal-600 rounded-lg hover:bg-teal-50" onclick="toggleMobile()">
+        <span class="msym">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-teal-50 px-6 py-5">
+    <div class="flex flex-col gap-4">
+      <span class="nav-link" onclick="showPage('home');toggleMobile()">Home</span>
+      <span class="nav-link" onclick="showPage('about');toggleMobile()">About Us</span>
+      <span class="nav-link" onclick="showPage('services');toggleMobile()">Services</span>
+      <span class="nav-link" onclick="showPage('events');toggleMobile()">Events</span>
+      <span class="nav-link" onclick="showPage('programs');toggleMobile()">Programs</span>
+      <span class="nav-link" onclick="showPage('reports');toggleMobile()">Transparency</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== PAGE: HOME ===== -->
+<div id="page-home" class="page active pt-[68px]">
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-teal-800 via-teal-700 to-teal-600 text-white py-24 px-4">
+    <div class="hero-blob bg-gold-200 w-96 h-96 -top-24 -right-24" style="background:#fcd400"></div>
+    <div class="hero-blob bg-teal-400 w-64 h-64 bottom-0 left-0" style="background:#5dcaa5;opacity:.12"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-xs font-bold mb-6 backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-gold-200 animate-pulse" style="background:#fcd400"></span>
+            Official Digital Governance Platform · 2024–2025
+          </div>
+          <h1 class="text-4xl md:text-6xl font-black leading-[1.1] mb-5 tracking-tight">
+            Serving the<br/>
+            <span style="color:#fcd400">Youth</span> of<br/>
+            Barangay Tibungco
+          </h1>
+          <p class="text-white/70 text-lg max-w-lg mb-8 leading-relaxed">
+            Your official gateway to documents, programs, and civic services — digitized, transparent, and accessible to every Tibungconon.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button class="bg-white text-teal-700 px-7 py-3.5 rounded-full font-black text-sm flex items-center gap-2 hover:bg-teal-50 transition-all shadow-xl" onclick="showDocRequest()">
+              <span class="msym fill text-[18px]">description</span> Request a Document
+            </button>
+            <button class="bg-white/10 border border-white/25 text-white px-7 py-3.5 rounded-full font-bold text-sm flex items-center gap-2 hover:bg-white/20 transition-all" onclick="showPage('about')">
+              Meet the Council <span class="msym text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-6 backdrop-blur-sm">
+            <div class="text-3xl font-black mb-1" style="color:#fcd400">4,200+</div>
+            <div class="text-xs font-bold text-white/60 uppercase tracking-widest">Registered Youth</div>
+          </div>
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-6 backdrop-blur-sm">
+            <div class="text-3xl font-black mb-1 text-white">15+</div>
+            <div class="text-xs font-bold text-white/60 uppercase tracking-widest">Active Programs</div>
+          </div>
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-6 backdrop-blur-sm">
+            <div class="text-3xl font-black mb-1 text-white">₱2.1M</div>
+            <div class="text-xs font-bold text-white/60 uppercase tracking-widest">Budget Allocated</div>
+          </div>
+          <div class="bg-white/10 border border-white/15 rounded-2xl p-6 backdrop-blur-sm">
+            <div class="text-3xl font-black mb-1" style="color:#fcd400">24/7</div>
+            <div class="text-xs font-bold text-white/60 uppercase tracking-widest">Online Access</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Service Dashboard -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 -mt-8 relative z-10">
+    <div class="bg-white rounded-3xl shadow-xl border border-teal-50 p-6 md:p-8">
+      <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+        <div>
+          <div class="section-label mb-1">Quick Access Dashboard</div>
+          <h2 class="text-xl font-black text-teal-800">What can we help you with today?</h2>
+        </div>
+        <button class="btn-outline px-5 py-2.5 rounded-full text-sm" onclick="showPage('services')">All Services →</button>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="card p-5 cursor-pointer" onclick="showDocRequest()">
+          <div class="w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center mb-4">
+            <span class="msym text-teal-600" style="font-size:22px">description</span>
+          </div>
+          <h3 class="font-black text-sm mb-1 text-teal-800">Document Request</h3>
+          <p class="text-xs text-teal-600/70 leading-relaxed">Clearance, Certificate, Cedula — online, hassle-free.</p>
+        </div>
+        <div class="card p-5 cursor-pointer" onclick="showPage('services');setTimeout(()=>showTab('youth-reg'),100)">
+          <div class="w-11 h-11 bg-gold-50 rounded-xl flex items-center justify-center mb-4" style="background:#fef9ea">
+            <span class="msym text-[22px]" style="color:#705d00">how_to_reg</span>
+          </div>
+          <h3 class="font-black text-sm mb-1 text-teal-800">Youth Registration</h3>
+          <p class="text-xs text-teal-600/70 leading-relaxed">Register as an SK member and access all benefits.</p>
+        </div>
+        <div class="card p-5 cursor-pointer" onclick="showPage('services');setTimeout(()=>showTab('track'),100)">
+          <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center mb-4" style="background:#e6eef8">
+            <span class="msym text-[22px]" style="color:#0f3870">track_changes</span>
+          </div>
+          <h3 class="font-black text-sm mb-1 text-teal-800">Track Request</h3>
+          <p class="text-xs text-teal-600/70 leading-relaxed">Check the status of your pending document request.</p>
+        </div>
+        <div class="card p-5 cursor-pointer" onclick="showPage('services');setTimeout(()=>showTab('complaint'),100)">
+          <div class="w-11 h-11 bg-crimson-50 rounded-xl flex items-center justify-center mb-4" style="background:#fee7e7">
+            <span class="msym text-[22px]" style="color:#7e0a24">report_problem</span>
+          </div>
+          <h3 class="font-black text-sm mb-1 text-teal-800">File a Complaint</h3>
+          <p class="text-xs text-teal-600/70 leading-relaxed">Secure and confidential grievance submission.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SK Officers Preview -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <div class="flex items-end justify-between mb-8 flex-wrap gap-4">
+      <div>
+        <div class="section-label mb-1">Our Council</div>
+        <h2 class="text-2xl font-black text-teal-800">SK Officers 2023–2026</h2>
+      </div>
+      <button class="btn-outline px-5 py-2 rounded-full text-sm" onclick="showPage('about')">Full Org Chart →</button>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="officer-card p-6 text-center">
+        <div class="officer-avatar" style="background:linear-gradient(135deg,#0f6e56,#1d9e75)">AP</div>
+        <div class="font-black text-sm text-teal-800">Anton Pascanan</div>
+        <div class="text-xs text-teal-500 font-semibold mt-0.5">Chairperson</div>
+        <span class="badge badge-teal mt-2">SK Chair</span>
+      </div>
+      <div class="officer-card p-6 text-center">
+        <div class="officer-avatar" style="background:linear-gradient(135deg,#8B4513,#D4A017)">IG</div>
+        <div class="font-black text-sm text-teal-800">Isabel Galan</div>
+        <div class="text-xs text-teal-500 font-semibold mt-0.5">Vice-Chairperson</div>
+        <span class="badge badge-gold mt-2">SK Vice</span>
+      </div>
+      <div class="officer-card p-6 text-center">
+        <div class="officer-avatar" style="background:linear-gradient(135deg,#0f3870,#3c73b8)">SM</div>
+        <div class="font-black text-sm text-teal-800">Sandra Macoral</div>
+        <div class="text-xs text-teal-500 font-semibold mt-0.5">Treasurer</div>
+        <span class="badge badge-navy mt-2">Finance</span>
+      </div>
+      <div class="officer-card p-6 text-center">
+        <div class="officer-avatar" style="background:linear-gradient(135deg,#7e0a24,#e11d48)">NH</div>
+        <div class="font-black text-sm text-teal-800">Nethan Heneoss</div>
+        <div class="text-xs text-teal-500 font-semibold mt-0.5">Councilor</div>
+        <span class="badge badge-red mt-2">Council</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements & Latest -->
+  <section class="bg-teal-800 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <div class="section-label text-teal-300 mb-2">Latest Updates</div>
+          <h2 class="text-2xl font-black mb-6">Announcements</h2>
+          <div class="space-y-4">
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
+              <div class="flex items-start justify-between gap-3 mb-2">
+                <h3 class="font-bold text-sm leading-snug">SK Election Results — Official Proclamation</h3>
+                <span class="badge badge-live flex-shrink-0" style="background:rgba(252,212,0,.2);color:#fcd400">New</span>
+              </div>
+              <p class="text-xs text-white/60 leading-relaxed">The Commission on Elections has officially proclaimed the newly elected SK Officers for the 2023–2026 term.</p>
+              <div class="text-xs text-teal-300 font-semibold mt-3">April 1, 2025</div>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
+              <h3 class="font-bold text-sm leading-snug mb-2">Community Cleanup Drive — Barangay Hall</h3>
+              <p class="text-xs text-white/60 leading-relaxed">Join us every Saturday morning for a cleaner Tibungco. All youth members are encouraged to participate.</p>
+              <div class="text-xs text-teal-300 font-semibold mt-3">March 28, 2025</div>
+            </div>
+            <div class="bg-white/10 border border-white/10 rounded-2xl p-5 backdrop-blur-sm">
+              <h3 class="font-bold text-sm leading-snug mb-2">Online Portal Now Live — Digital Services</h3>
+              <p class="text-xs text-white/60 leading-relaxed">Request barangay documents online anytime. Reduce foot traffic and serve our youth 24/7.</p>
+              <div class="text-xs text-teal-300 font-semibold mt-3">March 15, 2025</div>
+            </div>
+          </div>
+        </div>
+        <!-- FB Page embed placeholder -->
+        <div>
+          <div class="section-label text-teal-300 mb-2">Social Media</div>
+          <h2 class="text-2xl font-black mb-6">SK Tibungco on Facebook</h2>
+          <div class="bg-white/10 border border-white/15 rounded-2xl overflow-hidden" style="min-height:340px">
+            <div class="bg-[#1877f2] p-4 flex items-center gap-3">
+              <div class="w-9 h-9 bg-white rounded-full flex items-center justify-center">
+                <span class="msym text-[18px]" style="color:#1877f2">group</span>
+              </div>
+              <div>
+                <div class="font-bold text-sm">SK Tibungco – Official</div>
+                <div class="text-[10px] text-blue-200">@SangguniangKabataanTibungco</div>
+              </div>
+              <a href="https://www.facebook.com/sangguniangkabataanTibungco" target="_blank" class="ml-auto bg-white text-[#1877f2] px-3 py-1.5 rounded-full text-xs font-bold hover:bg-blue-50">Follow</a>
+            </div>
+            <!-- FB Page Plugin iframe -->
+            <div class="p-4 text-center text-white/50 text-sm" id="fb-feed">
+              <div class="mb-3"><span class="msym text-[40px] text-white/20">facebook</span></div>
+              <p class="text-xs leading-relaxed mb-4">Connect with us on Facebook for real-time updates, photo galleries, and community announcements.</p>
+              <a href="https://www.facebook.com/sangguniangkabataanTibungco" target="_blank" class="bg-[#1877f2] text-white px-5 py-2.5 rounded-full text-xs font-bold inline-flex items-center gap-2 hover:bg-[#166fe5] transition-colors">
+                <span class="msym text-[16px]">open_in_new</span> Visit Official Page
+              </a>
+            </div>
+          </div>
+          <p class="text-xs text-teal-400 mt-3 text-center">For live feed embedding, connect your Facebook Page Plugin credentials in the admin settings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: ABOUT US ===== -->
+<div id="page-about" class="page pt-[68px]">
+  <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label text-teal-300 mb-2">Who We Are</div>
+      <h1 class="text-4xl font-black mb-4">About SK Tibungco</h1>
+      <p class="text-white/70 max-w-2xl text-lg leading-relaxed">The Sangguniang Kabataan of Barangay Tibungco is the official representative and governing body of the youth sector, mandated under RA 10742 to advance youth welfare, civic participation, and community development.</p>
+    </div>
+  </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <!-- Mission / Vision -->
+    <div class="grid md:grid-cols-2 gap-6 mb-16">
+      <div class="card p-8">
+        <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center mb-4">
+          <span class="msym text-teal-600 fill">flag</span>
+        </div>
+        <h2 class="text-xl font-black mb-3 text-teal-800">Our Mission</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">To empower the youth of Barangay Tibungco through participatory governance, inclusive programs, and digital innovation — ensuring every young Tibungconon has a voice, access to services, and opportunities for growth.</p>
+      </div>
+      <div class="card p-8">
+        <div class="w-12 h-12 bg-gold-50 rounded-2xl flex items-center justify-center mb-4" style="background:#fef9ea">
+          <span class="msym fill" style="color:#705d00;font-size:22px">lightbulb</span>
+        </div>
+        <h2 class="text-xl font-black mb-3 text-teal-800">Our Vision</h2>
+        <p class="text-sm text-gray-600 leading-relaxed">A digitally-inclusive, transparent, and responsive barangay government that reflects the aspirations of its youth — a Tibungco where every young person thrives, leads, and belongs.</p>
+      </div>
+    </div>
+
+    <!-- Org Chart -->
+    <div class="mb-16">
+      <div class="section-label mb-2">Organizational Chart</div>
+      <h2 class="text-2xl font-black text-teal-800 mb-8">SK Council 2023–2026</h2>
+      <!-- Chairperson -->
+      <div class="flex flex-col items-center mb-6">
+        <div class="officer-card p-8 text-center w-64">
+          <div class="officer-avatar mx-auto" style="background:linear-gradient(135deg,#0f6e56,#1d9e75);width:96px;height:96px;font-size:1.8rem">AP</div>
+          <div class="font-black text-lg text-teal-800 mt-3">Anton Pascanan</div>
+          <div class="text-sm text-teal-500 font-semibold">SK Chairperson</div>
+          <span class="badge badge-teal mt-2">Chief Executive</span>
+        </div>
+        <div class="w-px bg-teal-200 h-8"></div>
+        <div class="w-full max-w-lg h-px bg-teal-200 relative"></div>
+      </div>
+      <!-- Other Officers -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#8B4513,#D4A017)">IG</div>
+          <div class="font-black text-sm text-teal-800">Isabel Galan</div>
+          <div class="text-xs text-teal-500 font-semibold">Vice-Chairperson</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#0f3870,#3c73b8)">SM</div>
+          <div class="font-black text-sm text-teal-800">Sandra Macoral</div>
+          <div class="text-xs text-teal-500 font-semibold">Treasurer</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#7e0a24,#e11d48)">NH</div>
+          <div class="font-black text-sm text-teal-800">Nethan Heneoss</div>
+          <div class="text-xs text-teal-500 font-semibold">Councilor</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#3b6d11,#639922)">RD</div>
+          <div class="font-black text-sm text-teal-800">Rosario Dela Cruz</div>
+          <div class="text-xs text-teal-500 font-semibold">Secretary</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#534ab7,#7f77dd)">ML</div>
+          <div class="font-black text-sm text-teal-800">Marco Laruan</div>
+          <div class="text-xs text-teal-500 font-semibold">Councilor</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#854f0b,#ef9f27)">JP</div>
+          <div class="font-black text-sm text-teal-800">Jasmin Padilla</div>
+          <div class="text-xs text-teal-500 font-semibold">Councilor</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#993556,#d4537e)">BR</div>
+          <div class="font-black text-sm text-teal-800">Bryan Reyes</div>
+          <div class="text-xs text-teal-500 font-semibold">Councilor</div>
+        </div>
+        <div class="officer-card p-6 text-center">
+          <div class="officer-avatar mx-auto mb-3" style="background:linear-gradient(135deg,#d85a30,#f0997b)">CE</div>
+          <div class="font-black text-sm text-teal-800">Clarissa Enriquez</div>
+          <div class="text-xs text-teal-500 font-semibold">Councilor / PRO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legal Mandate -->
+    <div class="bg-teal-50 rounded-3xl p-8 md:p-10 border border-teal-100">
+      <div class="section-label text-teal-600 mb-2">Legal Basis</div>
+      <h2 class="text-xl font-black text-teal-800 mb-4">Republic Act No. 10742</h2>
+      <p class="text-sm text-gray-600 leading-relaxed mb-4">The Sangguniang Kabataan Reform Act of 2015 mandates the SK to formulate and implement programs and policies for the youth, prepare an Annual Budget and Program of Activities, and submit mandatory reports to ensure transparency and accountability in all transactions.</p>
+      <div class="grid sm:grid-cols-3 gap-4 mt-6">
+        <div class="bg-white rounded-2xl p-5">
+          <span class="msym text-teal-500 fill mb-2" style="font-size:28px">gavel</span>
+          <div class="font-black text-sm text-teal-800 mb-1">Governance</div>
+          <div class="text-xs text-gray-500">Resolutions, ordinances, and policy enforcement</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5">
+          <span class="msym text-gold-500 fill mb-2" style="color:#705d00;font-size:28px">savings</span>
+          <div class="font-black text-sm text-teal-800 mb-1">Fiscal Management</div>
+          <div class="text-xs text-gray-500">Budget planning, COA compliance, AKYAT reporting</div>
+        </div>
+        <div class="bg-white rounded-2xl p-5">
+          <span class="msym text-navy-600 fill mb-2" style="color:#0f3870;font-size:28px">volunteer_activism</span>
+          <div class="font-black text-sm text-teal-800 mb-1">Youth Empowerment</div>
+          <div class="text-xs text-gray-500">Programs, training, and community engagement</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== PAGE: SERVICES ===== -->
+<div id="page-services" class="page pt-[68px]">
+  <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label text-teal-300 mb-2">Online Services</div>
+      <h1 class="text-4xl font-black mb-4">Citizen Services Portal</h1>
+      <p class="text-white/70 max-w-xl text-lg">Request documents, register as youth member, and access government services — 100% online, privacy-protected.</p>
+    </div>
+  </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <!-- Service Tabs -->
+    <div class="flex gap-2 flex-wrap mb-8" id="service-tabs">
+      <button class="tag-cat selected" onclick="showTab('docreq',this)"><span class="msym text-[16px]">description</span> Document Request</button>
+      <button class="tag-cat" onclick="showTab('youth-reg',this)"><span class="msym text-[16px]">how_to_reg</span> Youth Registration</button>
+      <button class="tag-cat" onclick="showTab('track',this)"><span class="msym text-[16px]">track_changes</span> Track Status</button>
+      <button class="tag-cat" onclick="showTab('complaint',this)"><span class="msym text-[16px]">report_problem</span> File Complaint</button>
+    </div>
+
+    <!-- TAB: Document Request -->
+    <div id="tab-docreq" class="tab-panel">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <div class="card p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center">
+                <span class="msym text-teal-600 fill">description</span>
+              </div>
+              <div>
+                <h2 class="text-xl font-black text-teal-800">Document Request Form</h2>
+                <div class="text-xs text-gray-400">All fields are required. Processing time: 1–3 business days.</div>
+              </div>
+            </div>
+            <!-- Step Indicator -->
+            <div class="flex items-center gap-2 mb-8" id="step-indicator">
+              <div class="step-circle step-active" id="step1-circle">1</div>
+              <div class="h-0.5 flex-1 bg-teal-100" id="step-line-1"></div>
+              <div class="step-circle step-idle" id="step2-circle">2</div>
+              <div class="h-0.5 flex-1 bg-teal-100" id="step-line-2"></div>
+              <div class="step-circle step-idle" id="step3-circle">3</div>
+            </div>
+
+            <!-- Step 1: Select Document -->
+            <div id="doc-step1">
+              <h3 class="font-black text-teal-700 mb-4">Step 1 — Select Document Type</h3>
+              <div class="grid sm:grid-cols-3 gap-4 mb-6">
+                <div class="border-2 border-teal-100 rounded-2xl p-5 cursor-pointer hover:border-teal-400 transition-all doc-type-card" onclick="selectDocType(this,'Barangay Clearance')">
+                  <span class="msym text-teal-500 fill mb-2" style="font-size:28px">verified_user</span>
+                  <div class="font-black text-sm text-teal-800">Barangay Clearance</div>
+                  <div class="text-xs text-gray-400 mt-1">₱150.00 · 1–2 days</div>
+                </div>
+                <div class="border-2 border-teal-100 rounded-2xl p-5 cursor-pointer hover:border-teal-400 transition-all doc-type-card" onclick="selectDocType(this,'Certificate of Residency')">
+                  <span class="msym text-teal-500 fill mb-2" style="font-size:28px">home_pin</span>
+                  <div class="font-black text-sm text-teal-800">Certificate of Residency</div>
+                  <div class="text-xs text-gray-400 mt-1">₱100.00 · 1–2 days</div>
+                </div>
+                <div class="border-2 border-teal-100 rounded-2xl p-5 cursor-pointer hover:border-teal-400 transition-all doc-type-card" onclick="selectDocType(this,'Community Tax Certificate')">
+                  <span class="msym text-teal-500 fill mb-2" style="font-size:28px">receipt_long</span>
+                  <div class="font-black text-sm text-teal-800">Community Tax Certificate (Cedula)</div>
+                  <div class="text-xs text-gray-400 mt-1">₱50.00 · Same day</div>
+                </div>
+              </div>
+              <div id="doc-type-selected" class="hidden mb-4 p-3 bg-teal-50 rounded-xl flex items-center gap-2 text-sm font-bold text-teal-700">
+                <span class="msym fill text-[18px]">check_circle</span>
+                <span id="doc-type-label">—</span>
+              </div>
+              <div class="mb-4">
+                <label class="block text-sm font-bold text-teal-700 mb-2">Purpose of Request</label>
+                <select class="input-f select-f" id="req-purpose">
+                  <option value="">Select purpose...</option>
+                  <option>Employment</option>
+                  <option>Business Permit</option>
+                  <option>Scholarship Application</option>
+                  <option>Loan / Credit Application</option>
+                  <option>Travel / Visa</option>
+                  <option>School Enrollment</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <button class="btn-teal w-full py-3.5 rounded-xl text-sm" onclick="docNextStep(1)">Continue to Personal Info →</button>
+            </div>
+
+            <!-- Step 2: Personal Info -->
+            <div id="doc-step2" class="hidden">
+              <h3 class="font-black text-teal-700 mb-4">Step 2 — Personal Information</h3>
+              <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">First Name</label>
+                  <input type="text" class="input-f" placeholder="Juan" id="req-firstname"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Last Name</label>
+                  <input type="text" class="input-f" placeholder="dela Cruz" id="req-lastname"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Date of Birth</label>
+                  <input type="date" class="input-f" id="req-dob"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Contact Number</label>
+                  <input type="tel" class="input-f" placeholder="09XX-XXX-XXXX" id="req-contact"/>
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Home Address</label>
+                  <input type="text" class="input-f" placeholder="Purok / Street, Barangay Tibungco" id="req-address"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Email Address</label>
+                  <input type="email" class="input-f" placeholder="juan@example.com" id="req-email"/>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-teal-700 mb-1.5">Preferred Pickup Date</label>
+                  <input type="date" class="input-f" id="req-pickup"/>
+                </div>
+              </div>
+              <!-- Privacy Consent -->
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+                <div class="flex gap-3">
+                  <input type="checkbox" id="privacy-consent" class="mt-0.5 accent-teal-600 w-4 h-4 flex-shrink-0"/>
+                  <label for="privacy-consent" class="text-xs text-amber-900 leading-relaxed cursor-pointer">
+                    <strong>Privacy Consent (RA 10173 – Data Privacy Act of 2012):</strong> I consent to the collection and processing of my personal information for the purpose of this document request. My data will be handled with strict confidentiality and will not be shared with third parties without my consent.
+                  </label>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button class="btn-outline flex-1 py-3.5 rounded-xl text-sm" onclick="docGoStep(1)">← Back</button>
+                <button class="btn-teal flex-1 py-3.5 rounded-xl text-sm" onclick="docNextStep(2)">Review & Submit →</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Confirm -->
+            <div id="doc-step3" class="hidden">
+              <h3 class="font-black text-teal-700 mb-4">Step 3 — Review & Confirm</h3>
+              <div id="doc-summary" class="bg-teal-50 rounded-2xl p-6 mb-6 text-sm space-y-2">
+                <!-- populated by JS -->
+              </div>
+              <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6 flex gap-3">
+                <span class="msym text-[20px]" style="color:#185fa5">info</span>
+                <p class="text-xs text-blue-800 leading-relaxed">After submission, you will receive a tracking number via email. Please bring a valid ID when picking up your document at the Barangay Hall.</p>
+              </div>
+              <div class="flex gap-3">
+                <button class="btn-outline flex-1 py-3.5 rounded-xl text-sm" onclick="docGoStep(2)">← Edit</button>
+                <button class="btn-teal flex-1 py-3.5 rounded-xl text-sm" onclick="submitDocRequest()">
+                  <span class="msym fill text-[16px] mr-1">send</span> Submit Request
+                </button>
+              </div>
+            </div>
+
+            <!-- Success -->
+            <div id="doc-success" class="hidden text-center py-8">
+              <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-5">
+                <span class="msym text-teal-500 fill" style="font-size:40px">check_circle</span>
+              </div>
+              <h3 class="text-2xl font-black text-teal-800 mb-2">Request Submitted!</h3>
+              <p class="text-gray-500 text-sm mb-4">Your tracking number is:</p>
+              <div class="bg-teal-50 rounded-2xl px-8 py-4 inline-block mb-6">
+                <span class="text-2xl font-black text-teal-700 tracking-widest" id="tracking-no">TIB-2025-00001</span>
+              </div>
+              <p class="text-xs text-gray-400 mb-6">A confirmation email has been sent. Please present a valid ID and this tracking number at pickup.</p>
+              <button class="btn-outline px-8 py-3 rounded-full text-sm" onclick="resetDocForm()">Submit Another Request</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-5">
+          <div class="card p-6">
+            <div class="section-label mb-3">Processing Times</div>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between"><span class="text-gray-600">Barangay Clearance</span><span class="font-bold text-teal-700">1–2 days</span></div>
+              <div class="flex justify-between"><span class="text-gray-600">Certificate of Residency</span><span class="font-bold text-teal-700">1–2 days</span></div>
+              <div class="flex justify-between"><span class="text-gray-600">Community Tax (Cedula)</span><span class="font-bold text-teal-700">Same day</span></div>
+            </div>
+          </div>
+          <div class="card p-6">
+            <div class="section-label mb-3">Requirements</div>
+            <ul class="text-xs text-gray-600 space-y-2 leading-relaxed">
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Valid Government-Issued ID</li>
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Proof of Residency in Brgy. Tibungco</li>
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Cedula (for Clearance)</li>
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Filled-out request form (this form)</li>
+            </ul>
+          </div>
+          <div class="card p-6 bg-teal-700 text-white border-0">
+            <div class="font-black mb-1">Need Help?</div>
+            <p class="text-xs text-teal-200 mb-4 leading-relaxed">Visit us at the Barangay Hall, Mondays to Fridays, 8:00 AM – 5:00 PM.</p>
+            <div class="text-xs text-white font-semibold">📞 (082) XXX-XXXX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Youth Registration -->
+    <div id="tab-youth-reg" class="tab-panel hidden">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 card p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#fef9ea">
+              <span class="msym fill" style="color:#705d00;font-size:22px">how_to_reg</span>
+            </div>
+            <div>
+              <h2 class="text-xl font-black text-teal-800">Youth Sector Registration</h2>
+              <div class="text-xs text-gray-400">For youth ages 15–30 residing in Barangay Tibungco.</div>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">First Name</label><input type="text" class="input-f" placeholder="Juan"/></div>
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Last Name</label><input type="text" class="input-f" placeholder="dela Cruz"/></div>
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Date of Birth</label><input type="date" class="input-f"/></div>
+            <div>
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Sex</label>
+              <select class="input-f select-f">
+                <option value="">Select...</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2"><label class="block text-sm font-bold text-teal-700 mb-1.5">Home Address (Purok/Street)</label><input type="text" class="input-f" placeholder="Purok 3, Sitio Maagang..."/></div>
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Contact Number</label><input type="tel" class="input-f" placeholder="09XX-XXX-XXXX"/></div>
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Email Address</label><input type="email" class="input-f" placeholder="juan@email.com"/></div>
+            <div>
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Educational Attainment</label>
+              <select class="input-f select-f">
+                <option value="">Select...</option>
+                <option>Elementary Level/Graduate</option>
+                <option>High School Level/Graduate</option>
+                <option>Senior High School</option>
+                <option>College Level</option>
+                <option>College Graduate</option>
+                <option>Post-Graduate</option>
+                <option>Out of School Youth</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Civil Status</label>
+              <select class="input-f select-f">
+                <option value="">Select...</option>
+                <option>Single</option>
+                <option>Married</option>
+                <option>Widowed</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Skills / Interests</label>
+              <input type="text" class="input-f" placeholder="e.g., Leadership, Sports, Arts, Technology..."/>
+            </div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+            <div class="flex gap-3">
+              <input type="checkbox" class="mt-0.5 accent-teal-600 w-4 h-4 flex-shrink-0"/>
+              <label class="text-xs text-amber-900 leading-relaxed cursor-pointer">
+                <strong>Privacy Consent (RA 10173):</strong> I consent to the collection and processing of my personal data by the SK of Barangay Tibungco for the purpose of youth sector registration and program participation. This data will be handled strictly in accordance with the Data Privacy Act of 2012.
+              </label>
+            </div>
+          </div>
+          <button class="btn-teal w-full py-3.5 rounded-xl text-sm" onclick="submitYouthReg()">
+            <span class="msym fill text-[16px] mr-1">how_to_reg</span> Register as SK Youth Member
+          </button>
+        </div>
+        <div class="space-y-5">
+          <div class="card p-6">
+            <div class="font-black text-teal-800 mb-2">Who Can Register?</div>
+            <ul class="text-xs text-gray-600 space-y-2 leading-relaxed">
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Filipino citizen aged 15–30</li>
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Resident of Barangay Tibungco</li>
+              <li class="flex gap-2"><span class="msym text-teal-400 fill text-[14px]">check_circle</span>Not a registered voter elsewhere</li>
+            </ul>
+          </div>
+          <div class="card p-6" style="background:#fef9ea;border-color:#fdefc6">
+            <span class="msym fill mb-2" style="color:#705d00;font-size:28px">star</span>
+            <div class="font-black text-sm text-yellow-800 mb-2">Benefits of Membership</div>
+            <ul class="text-xs space-y-1" style="color:#705d00">
+              <li>• Access to youth development programs</li>
+              <li>• Priority for SK-funded scholarships</li>
+              <li>• Voting rights in SK Assembly</li>
+              <li>• Skills training & livelihood programs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Track Status -->
+    <div id="tab-track" class="tab-panel hidden">
+      <div class="card p-8 max-w-2xl mx-auto">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-11 h-11 bg-navy-50 rounded-xl flex items-center justify-center" style="background:#e6eef8">
+            <span class="msym" style="color:#0f3870;font-size:22px">track_changes</span>
+          </div>
+          <div>
+            <h2 class="text-xl font-black text-teal-800">Track Your Request</h2>
+            <div class="text-xs text-gray-400">Enter your tracking number to check the status.</div>
+          </div>
+        </div>
+        <div class="flex gap-3 mb-8">
+          <input type="text" class="input-f flex-1" placeholder="e.g., TIB-2025-00001" id="track-input" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:.06em"/>
+          <button class="btn-teal px-6 py-2.5 rounded-xl text-sm font-bold" onclick="trackRequest()">Track</button>
+        </div>
+        <div id="track-result" class="hidden">
+          <div class="border border-teal-100 rounded-2xl overflow-hidden">
+            <div class="bg-teal-50 px-6 py-4 flex items-center justify-between">
+              <div>
+                <div class="font-black text-teal-800" id="track-doctype">Barangay Clearance</div>
+                <div class="text-xs text-gray-400 mt-0.5">Requested by: <span id="track-name" class="font-semibold">Juan dela Cruz</span></div>
+              </div>
+              <span class="req-status status-processing" id="track-status">Processing</span>
+            </div>
+            <div class="px-6 py-5 space-y-4">
+              <div class="flex gap-4">
+                <div class="timeline-dot mt-1.5 bg-teal-500"></div>
+                <div class="flex-1 pb-4 border-b border-teal-50">
+                  <div class="font-bold text-sm text-teal-800">Request Received</div>
+                  <div class="text-xs text-gray-400 mt-0.5">April 7, 2025 · 10:32 AM</div>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="timeline-dot mt-1.5" style="background:#3c73b8"></div>
+                <div class="flex-1 pb-4 border-b border-teal-50">
+                  <div class="font-bold text-sm text-teal-800">Document Under Preparation</div>
+                  <div class="text-xs text-gray-400 mt-0.5">April 8, 2025 · 9:00 AM</div>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="timeline-dot mt-1.5 bg-teal-100"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm text-gray-300">Ready for Pickup</div>
+                  <div class="text-xs text-gray-300 mt-0.5">Estimated: April 10, 2025</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center text-xs text-gray-400 mt-6">Sample tracking: <code class="bg-teal-50 text-teal-700 px-2 py-0.5 rounded font-mono">TIB-2025-00001</code></div>
+      </div>
+    </div>
+
+    <!-- TAB: Complaint -->
+    <div id="tab-complaint" class="tab-panel hidden">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 card p-8">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:#fee7e7">
+              <span class="msym fill" style="color:#7e0a24;font-size:22px">report_problem</span>
+            </div>
+            <div>
+              <h2 class="text-xl font-black text-teal-800">Grievance & Complaint Form</h2>
+              <div class="text-xs text-gray-400">Your complaint is kept strictly confidential.</div>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Full Name (Optional)</label><input type="text" class="input-f" placeholder="Leave blank to remain anonymous"/></div>
+            <div><label class="block text-sm font-bold text-teal-700 mb-1.5">Contact / Email (Optional)</label><input type="email" class="input-f" placeholder="For follow-up only"/></div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Type of Complaint</label>
+              <select class="input-f select-f">
+                <option value="">Select category...</option>
+                <option>Illegal/Nuisance Activities</option>
+                <option>Barangay Official Misconduct</option>
+                <option>Environmental / Health Concern</option>
+                <option>SK Program Irregularity</option>
+                <option>Public Safety Concern</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Incident Date (if applicable)</label>
+              <input type="date" class="input-f"/>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-bold text-teal-700 mb-1.5">Details of Complaint</label>
+              <textarea class="input-f" rows="5" placeholder="Please describe the issue in detail. Include location, persons involved (if any), and any relevant information."></textarea>
+            </div>
+          </div>
+          <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
+            <div class="flex gap-3">
+              <input type="checkbox" class="mt-0.5 accent-red-600 w-4 h-4 flex-shrink-0"/>
+              <label class="text-xs leading-relaxed cursor-pointer" style="color:#7e0a24">
+                <strong>Privacy Consent:</strong> I consent to the processing of information provided in this form by SK Tibungco for the purpose of addressing my complaint. If contact information is provided, it will be used solely for follow-up on this matter.
+              </label>
+            </div>
+          </div>
+          <button class="btn-teal w-full py-3.5 rounded-xl text-sm">
+            <span class="msym fill text-[16px] mr-1">send</span> Submit Complaint
+          </button>
+        </div>
+        <div class="card p-6 h-fit">
+          <span class="msym fill mb-3" style="color:#7e0a24;font-size:28px">security</span>
+          <div class="font-black text-teal-800 mb-2">Your Privacy is Protected</div>
+          <p class="text-xs text-gray-600 leading-relaxed mb-4">All complaints are handled confidentially. Anonymous submissions are accepted. Personal data will not be disclosed without your consent.</p>
+          <div class="bg-red-50 rounded-xl p-4">
+            <div class="text-xs font-bold mb-2" style="color:#7e0a24">For Emergencies</div>
+            <p class="text-xs text-gray-600">If this is an emergency, please contact:</p>
+            <div class="font-black text-sm text-teal-800 mt-1">Davao City Police: 911</div>
+            <div class="font-black text-sm text-teal-800">Barangay Hotline: 082-XXX-XXXX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== PAGE: EVENTS ===== -->
+<div id="page-events" class="page pt-[68px]">
+  <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label text-teal-300 mb-2">Community Calendar</div>
+      <h1 class="text-4xl font-black mb-4">Events & Activities</h1>
+      <p class="text-white/70 max-w-xl text-lg">Stay updated on SK programs, community activities, and important barangay events.</p>
+    </div>
+  </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex gap-2 flex-wrap mb-8" id="event-filters">
+      <button class="tag-cat selected" onclick="filterEvents('all',this)">All Events</button>
+      <button class="tag-cat" onclick="filterEvents('upcoming',this)">Upcoming</button>
+      <button class="tag-cat" onclick="filterEvents('ongoing',this)">Ongoing</button>
+      <button class="tag-cat" onclick="filterEvents('completed',this)">Completed</button>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="events-grid">
+      <!-- Event Cards -->
+      <div class="card overflow-hidden" data-status="upcoming">
+        <div class="h-3 bg-teal-500"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge badge-teal">Upcoming</span>
+            <div class="text-right text-xs text-gray-400 font-bold">Apr 20, 2025</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">Kabataang Tibungco Sports Fest 2025</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">Annual sports tournament open to all registered youth members. Events include basketball, volleyball, track & field, and swimming.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Tibungco Covered Court</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>7:00 AM – 5:00 PM</div>
+        </div>
+      </div>
+      <div class="card overflow-hidden" data-status="ongoing">
+        <div class="h-3 bg-gold-300" style="background:#fcd400"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge badge-gold">Ongoing</span>
+            <div class="text-right text-xs text-gray-400 font-bold">Every Sat</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">Oplan Linis: Community Cleanup Drive</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">Every Saturday morning, SK volunteers and community members join for a cleaner, greener Tibungco.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Various Puroks, Brgy. Tibungco</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>6:00 AM – 9:00 AM</div>
+        </div>
+      </div>
+      <div class="card overflow-hidden" data-status="upcoming">
+        <div class="h-3 bg-navy-400" style="background:#3c73b8"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge badge-navy">Upcoming</span>
+            <div class="text-right text-xs text-gray-400 font-bold">May 5, 2025</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">Youth Leadership Summit 2025</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">A one-day summit on youth leadership, civic engagement, and governance under the SK Reform Act.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Barangay Hall Multipurpose Hall</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>8:00 AM – 4:00 PM</div>
+        </div>
+      </div>
+      <div class="card overflow-hidden" data-status="completed">
+        <div class="h-3 bg-gray-300"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge" style="background:#f1efe8;color:#5f5e5a">Completed</span>
+            <div class="text-right text-xs text-gray-400 font-bold">Mar 1, 2025</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">SK Election Day 2025</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">The triennial SK elections were held successfully with 87% youth voter turnout — a new Tibungco record.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Tibungco Elementary School</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>7:00 AM – 3:00 PM</div>
+        </div>
+      </div>
+      <div class="card overflow-hidden" data-status="upcoming">
+        <div class="h-3 bg-teal-500"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge badge-teal">Upcoming</span>
+            <div class="text-right text-xs text-gray-400 font-bold">May 15, 2025</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">Livelihood Skills Training</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">Free 3-day skills training on computer literacy, basic business management, and food processing.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Tibungco Livelihood Center</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>9:00 AM – 5:00 PM</div>
+        </div>
+      </div>
+      <div class="card overflow-hidden" data-status="completed">
+        <div class="h-3 bg-gray-300"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-3">
+            <span class="badge" style="background:#f1efe8;color:#5f5e5a">Completed</span>
+            <div class="text-right text-xs text-gray-400 font-bold">Feb 14, 2025</div>
+          </div>
+          <h3 class="font-black text-teal-800 mb-1.5">Valentine's Youth Health Fair</h3>
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">Free medical consultation, dental check-up, and mental health awareness sessions for all youth residents.</p>
+          <div class="flex items-center gap-2 text-xs text-gray-400"><span class="msym text-[16px]">location_on</span>Barangay Health Center</div>
+          <div class="flex items-center gap-2 text-xs text-gray-400 mt-1"><span class="msym text-[16px]">schedule</span>8:00 AM – 3:00 PM</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== PAGE: PROGRAMS ===== -->
+<div id="page-programs" class="page pt-[68px]">
+  <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label text-teal-300 mb-2">Youth Programs</div>
+      <h1 class="text-4xl font-black mb-4">Programs & Initiatives</h1>
+      <p class="text-white/70 max-w-xl text-lg">From education to sports and livelihood — programs designed to uplift every young Tibungconon.</p>
+    </div>
+  </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <div class="flex gap-2 flex-wrap mb-8" id="prog-filters">
+      <button class="tag-cat selected" onclick="filterPrograms('all',this)">All Programs</button>
+      <button class="tag-cat" onclick="filterPrograms('education',this)">Education</button>
+      <button class="tag-cat" onclick="filterPrograms('sports',this)">Sports</button>
+      <button class="tag-cat" onclick="filterPrograms('livelihood',this)">Livelihood</button>
+      <button class="tag-cat" onclick="filterPrograms('health',this)">Health</button>
+      <button class="tag-cat" onclick="filterPrograms('civic',this)">Civic</button>
+    </div>
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6" id="programs-grid">
+      <div class="card p-7" data-pcat="education">
+        <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center mb-4"><span class="msym text-teal-600 fill" style="font-size:24px">school</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">SK Scholars Program</h3><span class="badge badge-teal">Active</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Financial assistance for college-bound youth from Barangay Tibungco. Covers tuition, books, and allowance for eligible scholars.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:68%"></div></div>
+        <div class="text-xs text-gray-400">34 of 50 slots filled</div>
+      </div>
+      <div class="card p-7" data-pcat="sports">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style="background:#fef9ea"><span class="msym fill" style="color:#705d00;font-size:24px">sports_basketball</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">Tibungco Sports League</h3><span class="badge badge-gold">Ongoing</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Year-round sports competitions in basketball, volleyball, and badminton to promote sportsmanship and a healthy lifestyle.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:45%"></div></div>
+        <div class="text-xs text-gray-400">Season 2 of 4 ongoing</div>
+      </div>
+      <div class="card p-7" data-pcat="livelihood">
+        <div class="w-12 h-12 bg-navy-50 rounded-2xl flex items-center justify-center mb-4" style="background:#e6eef8"><span class="msym fill" style="color:#0f3870;font-size:24px">work</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">Youth Livelihood Training</h3><span class="badge badge-navy">Enrolling</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Free skills training modules in computer literacy, basic entrepreneurship, food processing, and digital marketing.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:25%"></div></div>
+        <div class="text-xs text-gray-400">Enrollment opens May 2025</div>
+      </div>
+      <div class="card p-7" data-pcat="health">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style="background:#fee7e7"><span class="msym fill" style="color:#7e0a24;font-size:24px">health_and_safety</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">Youth Mental Health Initiative</h3><span class="badge badge-red">Active</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Monthly mental health awareness sessions, free counseling referrals, and support groups for youth dealing with stress and anxiety.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:80%"></div></div>
+        <div class="text-xs text-gray-400">320 of 400 youth reached</div>
+      </div>
+      <div class="card p-7" data-pcat="civic">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center mb-4" style="background:#e1f5ee"><span class="msym fill" style="color:#085041;font-size:24px">groups</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">Kabataang Lider Program</h3><span class="badge badge-teal">Active</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Leadership development training for aspiring youth leaders — covering public speaking, community organizing, and governance principles.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:55%"></div></div>
+        <div class="text-xs text-gray-400">22 of 40 participants trained</div>
+      </div>
+      <div class="card p-7" data-pcat="education">
+        <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center mb-4"><span class="msym text-teal-600 fill" style="font-size:24px">computer</span></div>
+        <div class="flex items-center justify-between mb-2"><h3 class="font-black text-teal-800">Digital Literacy Program</h3><span class="badge badge-teal">Upcoming</span></div>
+        <p class="text-xs text-gray-500 leading-relaxed mb-4">Computer fundamentals, internet safety, online job platforms, and digital financial literacy for out-of-school youth and senior students.</p>
+        <div class="progress-bar mb-1"><div class="progress-fill" style="width:10%"></div></div>
+        <div class="text-xs text-gray-400">Registration opens June 2025</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== PAGE: TRANSPARENCY (REPORTS) ===== -->
+<div id="page-reports" class="page pt-[68px]">
+  <div class="bg-gradient-to-r from-teal-800 to-teal-600 text-white py-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="section-label text-teal-300 mb-2">Fiscal Responsibility</div>
+      <h1 class="text-4xl font-black mb-4">Transparency & Reports</h1>
+      <p class="text-white/70 max-w-xl text-lg">Public funds, public trust. Complete financial disclosures, project updates, and COA-certified reports.</p>
+    </div>
+  </div>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Budget Summary -->
+    <div class="grid md:grid-cols-3 gap-5 mb-12">
+      <div class="stat-card">
+        <div class="section-label mb-1">Total Annual Budget</div>
+        <div class="text-3xl font-black text-teal-700">₱2,100,000</div>
+        <div class="text-xs text-gray-400 mt-1">FY 2024–2025 · SKF Allocation</div>
+      </div>
+      <div class="stat-card">
+        <div class="section-label mb-1">Funds Disbursed</div>
+        <div class="text-3xl font-black text-teal-700">₱1,345,000</div>
+        <div class="text-xs text-gray-400 mt-1">64% utilization as of Q3</div>
+      </div>
+      <div class="stat-card" style="background:#0f6e56;border-color:#0f6e56">
+        <div class="section-label text-teal-200 mb-1">COA Audit Status</div>
+        <div class="text-3xl font-black text-white">Verified ✓</div>
+        <div class="text-xs text-teal-300 mt-1">Commission on Audit · 2024</div>
+      </div>
+    </div>
+
+    <!-- Budget Breakdown -->
+    <div class="grid lg:grid-cols-2 gap-8 mb-12">
+      <div class="card p-8">
+        <div class="section-label mb-2">Budget Utilization 2024–2025</div>
+        <h2 class="text-xl font-black text-teal-800 mb-6">How We Spend Your Taxes</h2>
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Youth Development & Education</span><span class="text-teal-600">₱840,000 — 40%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Sports & Physical Wellness</span><span class="text-teal-600">₱420,000 — 20%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Livelihood & Skills Training</span><span class="text-teal-600">₱315,000 — 15%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:15%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Health & Mental Wellness</span><span class="text-teal-600">₱210,000 — 10%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Civic Engagement & Leadership</span><span class="text-teal-600">₱210,000 — 10%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm font-bold mb-2"><span>Admin & Operations</span><span class="text-teal-600">₱105,000 — 5%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Accomplishments -->
+      <div class="card p-8">
+        <div class="section-label mb-2">Project Accomplishments</div>
+        <h2 class="text-xl font-black text-teal-800 mb-6">FY 2024–2025 Highlights</h2>
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="timeline-dot mt-1.5 flex-shrink-0"></div>
+            <div>
+              <div class="font-black text-sm text-teal-800">34 Scholars Funded</div>
+              <div class="text-xs text-gray-500">SK Scholarship Program — ₱510,000 disbursed</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="timeline-dot mt-1.5 flex-shrink-0" style="background:#fcd400"></div>
+            <div>
+              <div class="font-black text-sm text-teal-800">Sports Fest — 280 Participants</div>
+              <div class="text-xs text-gray-500">Annual Sports Tournament — 12 events conducted</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="timeline-dot mt-1.5 flex-shrink-0" style="background:#3c73b8"></div>
+            <div>
+              <div class="font-black text-sm text-teal-800">Cleanup Drive — 48 Sessions</div>
+              <div class="text-xs text-gray-500">Oplan Linis — 1,200+ volunteer hours logged</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="timeline-dot mt-1.5 flex-shrink-0" style="background:#e11d48"></div>
+            <div>
+              <div class="font-black text-sm text-teal-800">Health Fair — 320 Youth Served</div>
+              <div class="text-xs text-gray-500">Free consultation, dental, and mental health sessions</div>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="timeline-dot mt-1.5 flex-shrink-0" style="background:#639922"></div>
+            <div>
+              <div class="font-black text-sm text-teal-800">Digital Portal Launched</div>
+              <div class="text-xs text-gray-500">This platform — reducing hall foot traffic by 60%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloadable Reports -->
+    <div class="section-label mb-4">Official Documents & Downloads</div>
+    <h2 class="text-xl font-black text-teal-800 mb-6">Public Financial Records</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="card p-6 cursor-pointer hover:border-teal-200">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#fee7e7"><span class="msym fill text-[22px]" style="color:#7e0a24">picture_as_pdf</span></div>
+        <div class="font-black text-sm text-teal-800 mb-1">Q3 Financial Statement</div>
+        <div class="text-xs text-gray-400 mb-4">Updated Oct 2024 · 2.4 MB</div>
+        <div class="text-teal-600 text-xs font-bold flex items-center gap-1"><span class="msym text-[14px]">download</span> Download PDF</div>
+      </div>
+      <div class="card p-6 cursor-pointer hover:border-teal-200">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#e6eef8"><span class="msym fill text-[22px]" style="color:#0f3870">description</span></div>
+        <div class="font-black text-sm text-teal-800 mb-1">Annual Progress Report</div>
+        <div class="text-xs text-gray-400 mb-4">FY 2023–2024 · 5.1 MB</div>
+        <div class="text-teal-600 text-xs font-bold flex items-center gap-1"><span class="msym text-[14px]">download</span> Download PDF</div>
+      </div>
+      <div class="card p-6 cursor-pointer hover:border-teal-200">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#fef9ea"><span class="msym fill text-[22px]" style="color:#705d00">table_chart</span></div>
+        <div class="font-black text-sm text-teal-800 mb-1">Budget Utilization Plan</div>
+        <div class="text-xs text-gray-400 mb-4">AIP 2024–2025 · 1.8 MB</div>
+        <div class="text-teal-600 text-xs font-bold flex items-center gap-1"><span class="msym text-[14px]">download</span> Download PDF</div>
+      </div>
+      <div class="card p-6 cursor-pointer hover:border-teal-200">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#e1f5ee"><span class="msym fill text-[22px]" style="color:#085041">policy</span></div>
+        <div class="font-black text-sm text-teal-800 mb-1">SK Code of Conduct</div>
+        <div class="text-xs text-gray-400 mb-4">Rev. 2024 · 0.9 MB</div>
+        <div class="text-teal-600 text-xs font-bold flex items-center gap-1"><span class="msym text-[14px]">download</span> Download PDF</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-teal-900 text-white mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+    <div class="sm:col-span-2 md:col-span-1">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center font-black text-white text-sm">SK</div>
+        <span class="font-black text-lg">SK TIBUNGCO</span>
+      </div>
+      <p class="text-teal-300 text-xs leading-relaxed mb-5">Empowering the youth of Barangay Tibungco through transparent governance, digital services, and community-driven programs.</p>
+      <div class="flex gap-3">
+        <a href="https://www.facebook.com/sangguniangkabataanTibungco" target="_blank" class="w-9 h-9 bg-teal-700 hover:bg-teal-600 rounded-full flex items-center justify-center transition-colors"><span class="msym text-[16px]">share</span></a>
+        <a href="#" class="w-9 h-9 bg-teal-700 hover:bg-teal-600 rounded-full flex items-center justify-center transition-colors"><span class="msym text-[16px]">alternate_email</span></a>
+        <a href="#" class="w-9 h-9 bg-teal-700 hover:bg-teal-600 rounded-full flex items-center justify-center transition-colors"><span class="msym text-[16px]">language</span></a>
+      </div>
+    </div>
+    <div>
+      <div class="font-black text-teal-300 text-xs uppercase tracking-widest mb-4">Quick Links</div>
+      <ul class="space-y-2.5 text-teal-200 text-xs">
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('home')">Home</span></li>
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('about')">About Us & Officers</span></li>
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('services')">Online Services</span></li>
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('events')">Events Calendar</span></li>
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('programs')">Programs</span></li>
+        <li><span class="hover:text-white cursor-pointer transition-colors" onclick="showPage('reports')">Financial Transparency</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-black text-teal-300 text-xs uppercase tracking-widest mb-4">Government</div>
+      <ul class="space-y-2.5 text-teal-200 text-xs">
+        <li><a href="https://www.gov.ph" target="_blank" class="hover:text-white transition-colors">Official Gazette PH</a></li>
+        <li><a href="https://davaocity.gov.ph" target="_blank" class="hover:text-white transition-colors">Davao City Portal</a></li>
+        <li><a href="https://nyc.gov.ph" target="_blank" class="hover:text-white transition-colors">NYC Philippines</a></li>
+        <li><a href="https://www.dilg.gov.ph" target="_blank" class="hover:text-white transition-colors">DILG Philippines</a></li>
+        <li><a href="https://www.coa.gov.ph" target="_blank" class="hover:text-white transition-colors">Commission on Audit</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="font-black text-teal-300 text-xs uppercase tracking-widest mb-4">Contact Us</div>
+      <div class="space-y-2 text-teal-200 text-xs mb-5">
+        <div class="flex gap-2"><span class="msym text-[16px] text-teal-400">location_on</span><span>Barangay Hall, Tibungco<br/>Davao City, 8000</span></div>
+        <div class="flex gap-2"><span class="msym text-[16px] text-teal-400">phone</span><span>(082) XXX-XXXX</span></div>
+        <div class="flex gap-2"><span class="msym text-[16px] text-teal-400">email</span><span>sk.tibungco@gmail.com</span></div>
+      </div>
+      <div class="text-teal-300 text-xs mb-2">Newsletter Signup</div>
+      <div class="flex gap-2">
+        <input type="email" placeholder="Your email" class="flex-1 bg-teal-800 border border-teal-700 rounded-lg px-3 py-2 text-xs text-white placeholder-teal-500 outline-none focus:border-teal-400"/>
+        <button class="bg-teal-500 hover:bg-teal-400 px-3 py-2 rounded-lg text-xs font-bold transition-colors">Go</button>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-teal-800 py-6 text-center text-xs text-teal-400">
+    <p>© 2025 Sangguniang Kabataan ng Barangay Tibungco, Davao City. All rights reserved.</p>
+    <p class="mt-1">Compliant with RA 10173 (Data Privacy Act) · RA 10742 (SK Reform Act) · DILG Memorandum Circulars</p>
+  </div>
+</footer>
+
+<!-- Float Action Button -->
+<div class="float-btn">
+  <button class="bg-white text-teal-700 shadow-xl w-12 h-12 rounded-full flex items-center justify-center border border-teal-100 hover:bg-teal-50 transition-all hover:scale-110" title="Help">
+    <span class="msym fill">support_agent</span>
+  </button>
+  <button class="btn-teal px-5 py-3 rounded-full flex items-center gap-2 text-sm shadow-xl" onclick="showDocRequest()">
+    <span class="msym fill text-[16px]">description</span> Request Doc
+  </button>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-[100] hidden">
+  <div class="bg-teal-700 text-white px-6 py-3 rounded-full text-sm font-bold shadow-xl flex items-center gap-2">
+    <span class="msym fill text-[16px]">check_circle</span>
+    <span id="toast-msg">Done!</span>
+  </div>
+</div>
+
+<script>
+/* ====== PAGE NAVIGATION ====== */
+let currentDocType = '';
+let currentStep = 1;
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const map = { home:'nav-home', about:'nav-about', services:'nav-services', events:'nav-events', programs:'nav-programs', reports:'nav-reports' };
+  const navEl = document.getElementById(map[id] || 'nav-home');
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobile() {
+  document.getElementById('mobile-nav').classList.toggle('hidden');
+}
+
+function showDocRequest() {
+  showPage('services');
+  setTimeout(() => showTab('docreq', document.querySelector('#service-tabs .tag-cat')), 100);
+}
+
+/* ====== SERVICE TABS ====== */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+  document.getElementById('tab-' + id).classList.remove('hidden');
+  if (btn) {
+    document.querySelectorAll('#service-tabs .tag-cat').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+}
+
+/* ====== DOC REQUEST FORM ====== */
+function selectDocType(card, type) {
+  document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('border-teal-500', 'bg-teal-50'));
+  card.classList.add('border-teal-500', 'bg-teal-50');
+  currentDocType = type;
+  const sel = document.getElementById('doc-type-selected');
+  sel.classList.remove('hidden');
+  document.getElementById('doc-type-label').textContent = type + ' selected';
+}
+
+function docNextStep(from) {
+  if (from === 1) {
+    if (!currentDocType) { showToast('Please select a document type'); return; }
+    if (!document.getElementById('req-purpose').value) { showToast('Please select a purpose'); return; }
+    docGoStep(2);
+  } else if (from === 2) {
+    const fn = document.getElementById('req-firstname').value;
+    const ln = document.getElementById('req-lastname').value;
+    const email = document.getElementById('req-email').value;
+    const consent = document.getElementById('privacy-consent').checked;
+    if (!fn || !ln) { showToast('Please enter your full name'); return; }
+    if (!email) { showToast('Please enter your email address'); return; }
+    if (!consent) { showToast('Please accept the privacy consent'); return; }
+    // Populate summary
+    document.getElementById('doc-summary').innerHTML = `
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between border-b border-teal-100 pb-2"><span class="text-gray-500">Document Type</span><span class="font-bold text-teal-700">${currentDocType}</span></div>
+        <div class="flex justify-between border-b border-teal-100 pb-2"><span class="text-gray-500">Full Name</span><span class="font-bold">${fn} ${ln}</span></div>
+        <div class="flex justify-between border-b border-teal-100 pb-2"><span class="text-gray-500">Email</span><span class="font-bold">${email}</span></div>
+        <div class="flex justify-between border-b border-teal-100 pb-2"><span class="text-gray-500">Purpose</span><span class="font-bold">${document.getElementById('req-purpose').value}</span></div>
+        <div class="flex justify-between"><span class="text-gray-500">Privacy Consent</span><span class="font-bold text-teal-600">✓ Accepted</span></div>
+      </div>`;
+    docGoStep(3);
+  }
+}
+
+function docGoStep(n) {
+  for (let i = 1; i <= 3; i++) {
+    const el = document.getElementById('doc-step' + i);
+    if (el) el.classList.toggle('hidden', i !== n);
+    const circle = document.getElementById('step' + i + '-circle');
+    if (circle) {
+      circle.className = 'step-circle ' + (i < n ? 'step-done' : i === n ? 'step-active' : 'step-idle');
+      if (i < n) circle.innerHTML = '✓';
+      else circle.textContent = i;
+    }
+  }
+  currentStep = n;
+}
+
+function submitDocRequest() {
+  const fn = document.getElementById('req-firstname').value;
+  const ln = document.getElementById('req-lastname').value;
+  const trackNo = 'TIB-2025-' + String(Math.floor(10000 + Math.random() * 90000));
+  document.getElementById('tracking-no').textContent = trackNo;
+  for (let i = 1; i <= 3; i++) document.getElementById('doc-step' + i).classList.add('hidden');
+  document.getElementById('doc-success').classList.remove('hidden');
+}
+
+function resetDocForm() {
+  currentDocType = '';
+  currentStep = 1;
+  document.getElementById('doc-success').classList.add('hidden');
+  document.getElementById('doc-step1').classList.remove('hidden');
+  document.getElementById('doc-step2').classList.add('hidden');
+  document.getElementById('doc-step3').classList.add('hidden');
+  document.getElementById('doc-type-selected').classList.add('hidden');
+  document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('border-teal-500', 'bg-teal-50'));
+  docGoStep(1);
+}
+
+/* ====== TRACK REQUEST ====== */
+function trackRequest() {
+  const val = document.getElementById('track-input').value.trim().toUpperCase();
+  if (!val) { showToast('Please enter a tracking number'); return; }
+  const result = document.getElementById('track-result');
+  // Demo: any TIB- code shows sample status
+  if (val.startsWith('TIB-')) {
+    result.classList.remove('hidden');
+    result.style.animation = 'fadeUp .3s ease';
+    document.getElementById('track-doctype').textContent = 'Barangay Clearance';
+    document.getElementById('track-name').textContent = 'Sample Resident';
+    document.getElementById('track-status').textContent = 'Processing';
+    document.getElementById('track-status').className = 'req-status status-processing';
+  } else {
+    result.classList.add('hidden');
+    showToast('Tracking number not found. Please verify and try again.');
+  }
+}
+
+/* ====== YOUTH REG SUBMIT ====== */
+function submitYouthReg() {
+  showToast('Registration submitted! You will receive a confirmation soon.');
+}
+
+/* ====== EVENT / PROGRAM FILTERS ====== */
+function filterEvents(status, btn) {
+  document.querySelectorAll('#events-grid [data-status]').forEach(el => {
+    el.style.display = (status === 'all' || el.dataset.status === status) ? '' : 'none';
+  });
+  document.querySelectorAll('#event-filters .tag-cat').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function filterPrograms(cat, btn) {
+  document.querySelectorAll('#programs-grid [data-pcat]').forEach(el => {
+    el.style.display = (cat === 'all' || el.dataset.pcat === cat) ? '' : 'none';
+  });
+  document.querySelectorAll('#prog-filters .tag-cat').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+/* ====== TOAST ====== */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3000);
+}
+
+/* ====== INIT ====== */
+window.addEventListener('load', () => {
+  // Animate progress bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.progress-fill').forEach(b => {
+          const w = b.style.width;
+          b.style.width = '0';
+          requestAnimationFrame(() => { setTimeout(() => { b.style.width = w; }, 100); });
+        });
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.card').forEach(c => observer.observe(c));
+});
+</script>
+</body>
+</html>

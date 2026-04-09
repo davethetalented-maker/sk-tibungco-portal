@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SK Connect — Barangay Tibungco</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#00685b", "primary-container": "#208274", "on-primary": "#ffffff",
+        "primary-fixed": "#9af3e1", "primary-fixed-dim": "#7ed6c5",
+        "on-primary-fixed": "#00201b", "on-primary-fixed-variant": "#005046",
+        secondary: "#705d00", "secondary-container": "#fcd400", "on-secondary": "#ffffff",
+        "on-secondary-container": "#6e5c00", "secondary-fixed": "#ffe16d",
+        "secondary-fixed-dim": "#e9c400",
+        tertiary: "#2d53c2", "tertiary-container": "#4a6ddc", "on-tertiary": "#ffffff",
+        surface: "#f4faff", "surface-bright": "#f4faff", "surface-dim": "#c0dfee",
+        "surface-variant": "#c9e7f7", "surface-tint": "#006b5e",
+        "surface-container-lowest": "#ffffff", "surface-container-low": "#e6f6ff",
+        "surface-container": "#d9f2ff", "surface-container-high": "#ceedfd",
+        "surface-container-highest": "#c9e7f7",
+        "on-surface": "#001f2a", "on-surface-variant": "#3e4946",
+        "on-background": "#001f2a", background: "#f4faff",
+        "outline": "#6e7976", "outline-variant": "#bdc9c5",
+        "inverse-surface": "#163440", "inverse-on-surface": "#e0f4ff",
+        "inverse-primary": "#7ed6c5",
+        error: "#ba1a1a", "error-container": "#ffdad6",
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1.5rem", full: "9999px" },
+      fontFamily: { headline: ["Plus Jakarta Sans"], body: ["Inter"], label: ["Inter"] }
+    }
+  }
+}
+</script>
+<style>
+  * { -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', sans-serif; background-color: #f4faff; color: #001f2a; }
+  h1, h2, h3, h4, .brand { font-family: 'Plus Jakarta Sans', sans-serif; }
+  .msym { font-family: 'Material Symbols Outlined'; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .msym.fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass { backdrop-filter: blur(12px); background: rgba(244,250,255,0.85); }
+  .page { display: none; }
+  .page.active { display: block; }
+  .btn-primary { background: linear-gradient(135deg, #00685b, #208274); color: #fff; border: none; }
+  .btn-primary:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(0,104,91,0.25); }
+  .btn-secondary { background: #c9e7f7; color: #001f2a; border: none; }
+  .card-lift { transition: transform 0.2s, box-shadow 0.2s; }
+  .card-lift:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -4px rgba(0,31,42,0.12); }
+  .shadow-ambient { box-shadow: 0 12px 32px -4px rgba(0,31,42,0.08); }
+  .nav-link { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 0.875rem; letter-spacing: -0.01em; color: #3e4946; transition: color 0.15s; cursor: pointer; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .nav-link:hover { color: #00685b; }
+  .nav-link.active { color: #00685b; border-bottom-color: #00685b; }
+  .step-complete { background: #00685b; color: white; }
+  .step-active { background: #00685b; color: white; border: 2px solid #00685b; }
+  .step-inactive { background: white; color: #6e7976; border: 2px solid #bdc9c5; }
+  .progress-bar { height: 6px; background: #d9f2ff; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 99px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+  .tag-sports { background: #e6f1fb; color: #185fa5; }
+  .tag-education { background: #e1f5ee; color: #085041; }
+  .tag-civic { background: #eaf3de; color: #3b6d11; }
+  .tag-leadership { background: #fbeaf0; color: #993556; }
+  .tag-culture { background: #faeeda; color: #854f0b; }
+  .tag-health { background: #fcebeb; color: #a32d2d; }
+  .tag-ongoing { background: #e1f5ee; color: #085041; }
+  .tag-upcoming { background: #e6f1fb; color: #185fa5; }
+  .tag-completed { background: #f1efe8; color: #5f5e5a; }
+  .tag-near { background: #faeeda; color: #854f0b; }
+  .filter-btn { padding: 6px 16px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1.5px solid #bdc9c5; color: #3e4946; background: white; transition: all 0.15s; font-family: 'Inter', sans-serif; }
+  .filter-btn.active { background: #00685b; color: white; border-color: #00685b; }
+  .filter-btn:hover:not(.active) { border-color: #00685b; color: #00685b; }
+  .stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-in { animation: fadeIn 0.3s ease forwards; }
+  .input-field { width: 100%; background: white; border: 1.5px solid #bdc9c5; border-radius: 12px; padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #001f2a; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .input-field:focus { border-color: #00685b; box-shadow: 0 0 0 3px rgba(0,104,91,0.12); }
+  .select-field { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236e7976'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-size: 20px; }
+  .timeline-bar { height: 4px; background: #d9f2ff; border-radius: 99px; position: relative; }
+  .timeline-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, #00685b, #208274); }
+</style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- TOP NAV -->
+<nav class="fixed top-0 w-full z-50 glass shadow-ambient">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('home')">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#00685b"/><path d="M10 26 L18 10 L26 26 Z" fill="white" opacity="0.9"/><circle cx="18" cy="20" r="4" fill="#fcd400"/></svg>
+      <span class="brand text-lg font-black text-primary tracking-tight">SK TIBUNGCO</span>
+    </div>
+    <div class="hidden md:flex items-center gap-6">
+      <span class="nav-link" id="nav-home" onclick="showPage('home')">About Us</span>
+      <span class="nav-link" id="nav-services" onclick="showPage('services')">Services</span>
+      <span class="nav-link" id="nav-events" onclick="showPage('events')">Events</span>
+      <span class="nav-link" id="nav-programs" onclick="showPage('programs')">Programs</span>
+      <span class="nav-link" id="nav-reports" onclick="showPage('reports')">News</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn-primary px-5 py-2 rounded-xl font-bold text-sm transition-all active:scale-95">Sign In</button>
+      <button class="md:hidden p-2 text-on-surface" onclick="toggleMobile()"><span class="msym">menu</span></button>
+    </div>
+  </div>
+  <!-- Mobile Nav -->
+  <div id="mobile-nav" class="hidden md:hidden bg-white/95 backdrop-blur px-6 pb-4 border-t border-slate-100">
+    <div class="flex flex-col gap-3 pt-3">
+      <span class="nav-link" onclick="showPage('home');toggleMobile()">About Us</span>
+      <span class="nav-link" onclick="showPage('services');toggleMobile()">Services</span>
+      <span class="nav-link" onclick="showPage('events');toggleMobile()">Events</span>
+      <span class="nav-link" onclick="showPage('programs');toggleMobile()">Programs</span>
+      <span class="nav-link" onclick="showPage('reports');toggleMobile()">News</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================== HOME PAGE ======================== -->
+<div id="page-home" class="page active">
+  <!-- Hero -->
+  <section class="pt-28 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="badge tag-civic mb-4">Official Portal of SK Tibungco Youth</div>
+        <h1 class="font-headline text-4xl sm:text-5xl font-black leading-tight mb-4" style="letter-spacing:-0.02em">
+          Empowering<br/><span class="text-primary">Barangay</span><br/><span style="color:#705d00">Tibungco Youth,</span><br/>Strengthening Governance.
+        </h1>
+        <p class="text-on-surface-variant text-base leading-relaxed mb-8 max-w-md">The heartbeat of Davao City's youth leadership. Access digital services, participate in community programs, and shape the future of Barangay Tibungco.</p>
+        <div class="flex flex-wrap gap-3">
+          <button class="btn-primary px-6 py-3 rounded-xl font-bold text-sm transition-all active:scale-95 flex items-center gap-2" onclick="showPage('services')">
+            <span class="msym fill text-lg">description</span> Request Documents
+          </button>
+          <button class="btn-secondary px-6 py-3 rounded-xl font-bold text-sm transition-all hover:bg-surface-container-high flex items-center gap-2">
+            <span class="msym text-lg">how_to_reg</span> Register as Youth
+          </button>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="rounded-2xl overflow-hidden shadow-ambient aspect-[4/3] bg-surface-container-low flex items-center justify-center">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Youth" class="w-full h-full object-cover rounded-2xl"/>
+        </div>
+        <div class="absolute bottom-4 right-4 bg-secondary-container rounded-xl px-4 py-3 shadow-ambient">
+          <div class="text-xs font-bold text-on-secondary-container opacity-70 uppercase tracking-wide">Active Programs</div>
+          <div class="text-2xl font-black stat-num text-on-secondary-container">12+ Join Now</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient text-center">
+        <div class="stat-num text-3xl text-primary mb-1">4.2k</div>
+        <div class="text-xs text-on-surface-variant font-medium uppercase tracking-wide">Registered Youth</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient text-center">
+        <div class="stat-num text-3xl text-primary mb-1">150+</div>
+        <div class="text-xs text-on-surface-variant font-medium uppercase tracking-wide">Events Conducted</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient text-center">
+        <div class="stat-num text-3xl" style="color:#705d00">₱2.4M</div>
+        <div class="text-xs text-on-surface-variant font-medium uppercase tracking-wide">Funds Allocated</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient text-center">
+        <div class="stat-num text-3xl text-primary mb-1">45</div>
+        <div class="text-xs text-on-surface-variant font-medium uppercase tracking-wide">Local Partnerships</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Mission -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="grid md:grid-cols-5 gap-6">
+      <div class="md:col-span-3 bg-surface-container-lowest rounded-2xl p-8 shadow-ambient">
+        <div class="w-10 h-10 bg-surface-container-low rounded-xl flex items-center justify-center mb-4">
+          <span class="msym text-tertiary">visibility</span>
+        </div>
+        <h3 class="font-headline text-xl font-bold mb-3">Our Vision</h3>
+        <p class="text-on-surface-variant leading-relaxed mb-6">To become the premier benchmark of youth leadership in Davao City, where every young Tibungconon is empowered, culturally rooted, and actively participating in building a resilient and sustainable future.</p>
+        <div class="flex items-center gap-2 text-primary text-sm font-bold cursor-pointer hover:gap-3 transition-all">
+          Strategic Direction 2030 <span class="msym text-base">trending_up</span>
+        </div>
+      </div>
+      <div class="md:col-span-2 bg-primary rounded-2xl p-8 text-white">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mb-4">
+          <span class="msym fill text-white">rocket_launch</span>
+        </div>
+        <h3 class="font-headline text-xl font-bold mb-3">Our Mission</h3>
+        <p class="text-white/80 leading-relaxed">To implement dynamic programs that promote education, health, and civic engagement, fostering a culture of excellence and service among the youth of Barangay Tibungco.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {['Integrity','Heritage','Innovation','Service'].map((v,i) => `<div class="bg-surface-container-low rounded-xl p-5">
+        <div class="font-headline font-bold text-on-surface mb-2">${v}</div>
+        <div class="text-xs text-on-surface-variant leading-relaxed">${['Unwavering commitment to honesty and ethical leadership.','Preserving the rich cultural tapestry of Davao\'s youth.','Embracing digital transformation and creative solutions.','Putting the community\'s welfare at the center of all actions.'][i]}</div>
+      </div>`).join('')}
+    </div>
+  </section>
+
+  <!-- Council -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <div class="text-xs font-bold text-primary uppercase tracking-widest mb-2">Governance</div>
+        <h2 class="font-headline text-3xl font-black" style="letter-spacing:-0.02em">Meet the Barangay Council</h2>
+      </div>
+      <p class="text-on-surface-variant text-sm max-w-xs">Our leadership team is composed of dedicated young individuals committed to transparency and excellence in public service.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient card-lift text-center">
+        <div class="w-16 h-16 rounded-full bg-surface-container mx-auto mb-3 overflow-hidden"><div class="w-full h-full bg-primary/20 flex items-center justify-center"><span class="msym text-primary text-2xl fill">person</span></div></div>
+        <div class="font-headline font-bold text-sm">Hon. Marcus Rivera</div>
+        <div class="text-xs text-on-surface-variant mt-1">SK Chairperson</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient card-lift text-center">
+        <div class="w-16 h-16 rounded-full bg-surface-container mx-auto mb-3 overflow-hidden"><div class="w-full h-full bg-secondary/20 flex items-center justify-center"><span class="msym text-secondary text-2xl fill">person</span></div></div>
+        <div class="font-headline font-bold text-sm">Hon. Elena Santos</div>
+        <div class="text-xs text-on-surface-variant mt-1">SK Kagawad</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient card-lift text-center">
+        <div class="w-16 h-16 rounded-full bg-surface-container mx-auto mb-3 overflow-hidden"><div class="w-full h-full bg-tertiary/20 flex items-center justify-center"><span class="msym text-tertiary text-2xl fill">person</span></div></div>
+        <div class="font-headline font-bold text-sm">Hon. David Chen</div>
+        <div class="text-xs text-on-surface-variant mt-1">SK Kagawad</div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl p-5 shadow-ambient card-lift text-center">
+        <div class="w-16 h-16 rounded-full bg-surface-container mx-auto mb-3 overflow-hidden"><div class="w-full h-full bg-primary/15 flex items-center justify-center"><span class="msym text-primary text-2xl fill">person</span></div></div>
+        <div class="font-headline font-bold text-sm">Hon. Sofia Lopez</div>
+        <div class="text-xs text-on-surface-variant mt-1">SK Kagawad</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcements -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="flex items-end justify-between mb-6">
+      <div>
+        <h2 class="font-headline text-2xl font-black" style="letter-spacing:-0.02em">Latest Announcements</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Stay updated with the pulse of the community</p>
+      </div>
+      <button class="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">View All <span class="msym text-base">arrow_forward</span></button>
+    </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="md:col-span-2 bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift">
+        <div class="h-40 bg-surface-container overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80" alt="" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-5">
+          <span class="badge tag-education mb-2">Featured</span>
+          <h3 class="font-headline font-bold text-base mb-2">Digital Literacy Bootcamp: Skills for the Future</h3>
+          <p class="text-on-surface-variant text-sm">Join us for a 3-day intensive workshop on digital tools, social media management, and responsible AI usage for students in Tibungco.</p>
+          <button class="mt-3 text-primary text-sm font-bold flex items-center gap-1">Read Article <span class="msym text-sm">arrow_forward</span></button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="bg-secondary-container rounded-2xl p-5 flex-1">
+          <span class="badge" style="background:rgba(0,0,0,0.1);color:#6e5c00">Featured</span>
+          <h3 class="font-headline font-bold text-base mt-2 mb-2 text-on-secondary-container">Scholarship Application Extension until November 15</h3>
+          <p class="text-on-secondary-container/70 text-xs mb-3">Due to popular demand, we are extending the deadline for the Youth Leaders Build program.</p>
+          <button class="btn-primary px-4 py-2 rounded-lg text-xs font-bold">Apply Now</button>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-4 shadow-ambient card-lift">
+          <span class="badge tag-civic mb-2">Governance</span>
+          <p class="font-headline font-bold text-sm">Monthly Youth Assembly: Quarter 4 Strategic Planning</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="font-headline text-2xl font-black" style="letter-spacing:-0.02em">Upcoming Events</h2>
+      <button class="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all" onclick="showPage('events')">View All <span class="msym text-base">arrow_forward</span></button>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient card-lift">
+        <div class="h-24 bg-primary/10 overflow-hidden"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&q=80" alt="" class="w-full h-full object-cover opacity-80"/></div>
+        <div class="p-3"><div class="text-xs text-on-surface-variant mb-1">NOV 08</div><div class="font-headline font-bold text-xs">Youth Leadership Summit 2024</div><div class="text-xs text-on-surface-variant mt-1">Barangay Multi-Purpose Hall</div><button class="mt-2 text-xs font-bold text-primary">Join Event</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient card-lift">
+        <div class="h-24 bg-primary/10 overflow-hidden"><img src="https://images.unsplash.com/photo-1546519638405-a9d1a97e0cc4?w=300&q=80" alt="" class="w-full h-full object-cover opacity-80"/></div>
+        <div class="p-3"><div class="text-xs text-on-surface-variant mb-1">NOV 12</div><div class="font-headline font-bold text-xs">Inter-Purok Basketball League Finals</div><div class="text-xs text-on-surface-variant mt-1">Barangay Gymnasium</div><button class="mt-2 text-xs font-bold text-primary">Join Event</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient card-lift">
+        <div class="h-24 bg-primary/10 overflow-hidden"><img src="https://images.unsplash.com/photo-1441260038675-7329ab4cc264?w=300&q=80" alt="" class="w-full h-full object-cover opacity-80"/></div>
+        <div class="p-3"><div class="text-xs text-on-surface-variant mb-1">NOV 20</div><div class="font-headline font-bold text-xs">Coastal Clean-up & Tree Planting</div><div class="text-xs text-on-surface-variant mt-1">Tibungco Coastal Area</div><button class="mt-2 text-xs font-bold text-primary">Join Event</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient card-lift">
+        <div class="h-24 bg-primary/10 overflow-hidden"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=300&q=80" alt="" class="w-full h-full object-cover opacity-80"/></div>
+        <div class="p-3"><div class="text-xs text-on-surface-variant mb-1">DEC 05</div><div class="font-headline font-bold text-xs">Freelancing & Virtual Assistant Seminar</div><div class="text-xs text-on-surface-variant mt-1">SK Tech Hub</div><button class="mt-2 text-xs font-bold text-primary">Join Event</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 sm:px-6 max-w-7xl mx-auto mb-16">
+    <div class="bg-primary rounded-2xl p-10 md:p-14 text-center text-white relative overflow-hidden">
+      <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full"></div>
+      <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-white/5 rounded-full"></div>
+      <h2 class="font-headline text-3xl md:text-4xl font-black mb-4 relative">Ready to be part of the change?</h2>
+      <p class="text-white/80 mb-8 max-w-lg mx-auto text-sm">Register today to join our youth database and gain access to exclusive programs, scholarships, and governance updates in Tibungco.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-xl font-bold text-sm transition-all hover:scale-105 active:scale-95">Get Started Now</button>
+        <button class="border-2 border-white/40 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all hover:bg-white/10">Download SK App</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================== SERVICES PAGE ======================== -->
+<div id="page-services" class="page">
+  <main class="pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+    <header class="mb-12 max-w-2xl">
+      <h1 class="font-headline text-4xl md:text-5xl font-black mb-4" style="letter-spacing:-0.02em">
+        Empowering the <span class="text-secondary">Tibungco Pulse.</span>
+      </h1>
+      <p class="text-on-surface-variant text-base leading-relaxed">Fast-tracking essential government services for the youth of Barangay Tibungco. Digital, seamless, and built for your speed.</p>
+    </header>
+    <div class="grid md:grid-cols-12 gap-5">
+      <!-- Document Requests -->
+      <div class="md:col-span-8 relative overflow-hidden bg-surface-container-lowest rounded-2xl p-8 shadow-ambient card-lift cursor-pointer" onclick="showPage('docrequest')">
+        <div class="flex items-center justify-between mb-6">
+          <div class="p-3 bg-primary/10 rounded-xl"><span class="msym text-primary text-3xl">description</span></div>
+          <span class="badge tag-education">Most Requested</span>
+        </div>
+        <h3 class="font-headline text-2xl font-extrabold mb-3">Document Requests</h3>
+        <p class="text-on-surface-variant mb-6 text-sm leading-relaxed max-w-md">Secure your essential civic documents online. We've digitized the process to save you time and travel.</p>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+            <span class="msym text-primary block mb-1 fill">verified_user</span>
+            <span class="font-bold text-sm block">SK Clearance</span>
+            <span class="text-xs text-on-surface-variant">24h Processing</span>
+          </div>
+          <div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+            <span class="msym text-primary block mb-1 fill">badge</span>
+            <span class="font-bold text-sm block">Certificate</span>
+            <span class="text-xs text-on-surface-variant">Instant Digital Copy</span>
+          </div>
+          <div class="p-4 bg-surface-container-low rounded-xl hover:bg-surface-container-high transition-colors">
+            <span class="msym text-primary block mb-1 fill">article</span>
+            <span class="font-bold text-sm block">Cedula</span>
+            <span class="text-xs text-on-surface-variant">Electronic Tax Cert</span>
+          </div>
+        </div>
+        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+      </div>
+      <!-- Youth Registration -->
+      <div class="md:col-span-4 bg-gradient-to-br from-primary to-primary-container rounded-2xl p-8 text-white card-lift cursor-pointer flex flex-col justify-between">
+        <div>
+          <div class="p-3 bg-white/20 backdrop-blur rounded-xl w-fit mb-6">
+            <span class="msym fill text-white text-3xl">person_add</span>
+          </div>
+          <h3 class="font-headline text-2xl font-extrabold mb-3">Youth Registration</h3>
+          <p class="text-white/80 leading-relaxed text-sm">Join the official registry of Barangay Tibungco's youth to access exclusive benefits, voting rights in youth councils, and localized alerts.</p>
+        </div>
+        <button class="mt-8 bg-white text-primary px-5 py-3 rounded-xl font-bold text-sm flex items-center justify-between hover:shadow-xl transition-all">
+          Register Now <span class="msym">arrow_forward</span>
+        </button>
+      </div>
+      <!-- Educational Programs -->
+      <div class="md:col-span-5 bg-surface-container-high rounded-2xl p-8 card-lift cursor-pointer" onclick="showPage('programs')">
+        <div class="p-3 bg-tertiary/10 rounded-xl w-fit mb-5">
+          <span class="msym text-tertiary text-3xl">school</span>
+        </div>
+        <h3 class="font-headline text-2xl font-extrabold mb-3">Educational Programs</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed mb-5">Scholarships, workshops, and vocational training initiatives designed to bridge the skill gap and empower your career path.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="px-3 py-1 bg-white rounded-lg text-xs font-semibold text-tertiary">Scholarships</span>
+          <span class="px-3 py-1 bg-white rounded-lg text-xs font-semibold text-tertiary">Workshops</span>
+          <span class="px-3 py-1 bg-white rounded-lg text-xs font-semibold text-tertiary">STEM</span>
+        </div>
+      </div>
+      <!-- Resource Center -->
+      <div class="md:col-span-7 bg-secondary-container rounded-2xl p-8 card-lift cursor-pointer">
+        <div class="flex flex-col md:flex-row gap-6 items-center">
+          <div class="flex-1">
+            <h3 class="font-headline text-2xl font-extrabold text-on-secondary-container mb-3">Resource Center</h3>
+            <p class="text-on-secondary-container/80 text-sm mb-5">Download toolkits, guidelines, and policy briefs to stay informed about youth governance and community development.</p>
+            <a class="inline-flex items-center gap-2 font-bold text-sm text-on-secondary-container underline underline-offset-4" href="#">Access Library <span class="msym text-base">open_in_new</span></a>
+          </div>
+          <div class="w-full md:w-32 h-32 bg-white/30 rounded-xl flex items-center justify-center">
+            <span class="msym text-5xl text-secondary">folder_zip</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Help Section -->
+    <section class="mt-16 p-10 bg-surface-container-low rounded-[2rem] flex flex-col items-center text-center">
+      <div class="w-14 h-14 bg-white rounded-full shadow-ambient flex items-center justify-center mb-5">
+        <span class="msym text-primary text-2xl">support_agent</span>
+      </div>
+      <h2 class="font-headline text-2xl font-extrabold mb-3">Can't find what you're looking for?</h2>
+      <p class="text-on-surface-variant max-w-lg mb-7 text-sm">Our dedicated support team is here to help you navigate through our services and ensure you get the assistance you need.</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <button class="btn-primary px-7 py-3 rounded-xl font-bold text-sm transition-all active:scale-95">Chat with us</button>
+        <button class="btn-secondary px-7 py-3 rounded-xl font-bold text-sm hover:bg-surface-container-highest">View FAQ</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ======================== DOCUMENT REQUEST FORM ======================== -->
+<div id="page-docrequest" class="page">
+  <main class="pt-24 pb-20 px-4 sm:px-6 max-w-3xl mx-auto">
+    <!-- Step Indicator -->
+    <div class="flex items-center mb-10">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full step-complete flex items-center justify-center text-sm font-bold"><span class="msym text-sm">check</span></div>
+        <span class="text-xs font-bold text-primary">DOCUMENT</span>
+      </div>
+      <div class="flex-1 h-0.5 bg-primary mx-3"></div>
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full step-active flex items-center justify-center text-sm font-bold">2</div>
+        <span class="text-xs font-bold text-primary">DETAILS</span>
+      </div>
+      <div class="flex-1 h-0.5 bg-surface-container-high mx-3"></div>
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full step-inactive flex items-center justify-center text-sm font-bold">3</div>
+        <span class="text-xs font-bold text-on-surface-variant">REVIEW</span>
+      </div>
+    </div>
+
+    <h1 class="font-headline text-3xl font-black mb-2"><span class="text-on-surface">Personal</span> <span class="text-primary">Details</span></h1>
+    <p class="text-on-surface-variant text-sm mb-8">Please provide accurate information as it will appear on your official document. All fields marked with * are required.</p>
+
+    <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-ambient">
+      <div class="grid md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Selected Document</label>
+          <div class="input-field flex items-center gap-2 bg-surface-container-low">
+            <span class="msym text-primary text-base fill">description</span>
+            <span class="font-semibold text-sm">SK Clearance (Barangay Level)</span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Purpose of Request *</label>
+          <select class="input-field select-field">
+            <option>Employment Requirement</option>
+            <option>School Enrollment</option>
+            <option>Travel Abroad</option>
+            <option>Legal Requirement</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Full Name (Last, First, Middle) *</label>
+          <input type="text" class="input-field" placeholder="Dela Cruz, Juan Pedro"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Date of Birth *</label>
+          <input type="date" class="input-field"/>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Contact Number *</label>
+          <div class="flex gap-2">
+            <span class="input-field w-16 text-center font-bold">+63</span>
+            <input type="tel" class="input-field flex-1" placeholder="900 000 0000"/>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Barangay Residence *</label>
+          <select class="input-field select-field">
+            <option>Buhangin Proper</option>
+            <option>Tibungco</option>
+            <option>Panacan</option>
+          </select>
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-xs font-bold text-on-surface-variant mb-2">Current Residential Address *</label>
+          <textarea class="input-field h-20 resize-none" placeholder="Street Name, House Number, Landmark"></textarea>
+        </div>
+      </div>
+      <div class="border-t border-surface-container-high mt-6 pt-6 flex items-center justify-between">
+        <button class="flex items-center gap-2 text-sm font-bold text-on-surface-variant hover:text-on-surface transition-colors" onclick="showPage('services')">
+          <span class="msym">arrow_back</span> Back to Document
+        </button>
+        <button class="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 transition-all active:scale-95">
+          Review Request <span class="msym">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Info Card -->
+    <div class="mt-6 bg-surface-container-low rounded-xl p-5 flex gap-3">
+      <div class="w-8 h-8 bg-tertiary/10 rounded-full flex items-center justify-center flex-shrink-0">
+        <span class="msym text-tertiary text-sm">info</span>
+      </div>
+      <div>
+        <span class="font-bold text-sm block mb-1">Did you know?</span>
+        <p class="text-on-surface-variant text-xs leading-relaxed">SK Connect documents are verifiable via QR Code. Ensure your details match your government-issued ID for seamless processing.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================== EVENTS PAGE ======================== -->
+<div id="page-events" class="page">
+  <main class="pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+    <!-- Hero -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-14">
+      <div>
+        <h1 class="font-headline text-4xl md:text-5xl font-black mb-4" style="letter-spacing:-0.02em">
+          The Civic Pulse<br/><span class="text-secondary">Events Hub</span>
+        </h1>
+        <p class="text-on-surface-variant text-sm leading-relaxed mb-6 max-w-md">Stay connected with the heartbeat of Barangay Tibungco's youth. From grassroots sports to digital innovation workshops, find your next opportunity here.</p>
+        <div class="flex gap-3">
+          <input type="text" class="input-field flex-1 max-w-xs" placeholder="Search events..."/>
+          <select class="input-field w-36 select-field">
+            <option>All Types</option>
+            <option>Sports</option>
+            <option>Education</option>
+            <option>Civic</option>
+          </select>
+          <button class="bg-secondary-container text-on-secondary-container px-5 py-2 rounded-xl font-bold text-sm">Search</button>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden h-48 md:h-64">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="" class="w-full h-full object-cover"/>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex gap-2 flex-wrap mb-8">
+      <button class="filter-btn active" onclick="filterEvents(this,'all')">All Upcoming</button>
+      <button class="filter-btn" onclick="filterEvents(this,'sports')">Sports League</button>
+      <button class="filter-btn" onclick="filterEvents(this,'education')">Digital Career</button>
+      <button class="filter-btn" onclick="filterEvents(this,'civic')">Civic</button>
+      <button class="filter-btn" onclick="filterEvents(this,'leadership')">Leadership</button>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="grid md:grid-cols-3 gap-5 mb-14" id="events-grid">
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="sports">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1546519638405-a9d1a97e0cc4?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-sports absolute top-3 left-3">Sports</span></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Dec 15, 2024 <span class="msym text-sm">schedule</span>08:00 AM</div><h3 class="font-headline font-bold mb-2">Inter-Barangay Summer Slam Finals</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Join us for the most anticipated youth basketball event of the year. Final match featuring our homegrown athletes.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="education">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-education absolute top-3 left-3">Education</span></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Dec 18, 2024 <span class="msym text-sm">schedule</span>01:00 PM</div><h3 class="font-headline font-bold mb-2">Digital Davao: Coding Workshop</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Learn the basics of web development and UI design from industry experts. Limited slots available.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="civic">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1441260038675-7329ab4cc264?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-civic absolute top-3 left-3">Civic</span><div class="absolute bottom-3 right-3 w-8 h-8 bg-secondary-container rounded-full flex items-center justify-center cursor-pointer"><span class="msym text-sm text-on-secondary-container">add</span></div></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Dec 20, 2024 <span class="msym text-sm">schedule</span>06:30 AM</div><h3 class="font-headline font-bold mb-2">Green Davao Tree Planting Day</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Make a difference in our local environment. Join the SK collective in our mission to plant 5,000 trees.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="leadership">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-leadership absolute top-3 left-3">Leadership</span></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Jan 05, 2025 <span class="msym text-sm">schedule</span>09:00 AM</div><h3 class="font-headline font-bold mb-2">Youth Governance Forum 2025</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">A dialogue between youth leaders and city officials to discuss the future of urban governance in Davao.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="culture">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-culture absolute top-3 left-3">Culture</span></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Jan 12, 2025 <span class="msym text-sm">schedule</span>06:00 PM</div><h3 class="font-headline font-bold mb-2">Kadayawan Youth Beats</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Celebrating local talent through music, dance, and digital art. Featuring the best underground performers.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-cat="health">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-health absolute top-3 left-3">Health</span></div>
+        <div class="p-5"><div class="flex items-center gap-3 text-xs text-on-surface-variant mb-2"><span class="msym text-sm">calendar_today</span>Jan 15, 2025 <span class="msym text-sm">schedule</span>05:00 AM</div><h3 class="font-headline font-bold mb-2">Mindful Mornings Wellness</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Kickstart your health journey with a free yoga and mental wellness workshop. Open to all skill levels.</p><button class="btn-primary px-4 py-2 rounded-xl text-xs font-bold">View Details →</button></div>
+      </div>
+    </div>
+
+    <!-- Host CTA -->
+    <div class="bg-primary rounded-2xl p-10 text-center text-white relative overflow-hidden">
+      <h2 class="font-headline text-2xl font-black mb-3">Host Your Own Event?</h2>
+      <p class="text-white/80 text-sm mb-6 max-w-md mx-auto">The SK is here to support youth-led initiatives. Apply for event sponsorship or venue usage today.</p>
+      <div class="flex justify-center gap-4 flex-wrap">
+        <button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-all">Apply Now</button>
+        <button class="border-2 border-white/40 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-white/10">Learn More</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================== PROGRAMS PAGE ======================== -->
+<div id="page-programs" class="page">
+  <main class="pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+    <!-- Hero -->
+    <div class="grid md:grid-cols-2 gap-8 items-center mb-14">
+      <div>
+        <div class="badge tag-civic mb-4">Empowering Tibungco</div>
+        <h1 class="font-headline text-4xl md:text-5xl font-black mb-4" style="letter-spacing:-0.02em">
+          Our Programs<br/><span class="text-secondary font-black italic">&amp; Initiatives</span>
+        </h1>
+        <p class="text-on-surface-variant text-sm leading-relaxed mb-6 max-w-md">Fueling the kinetic energy of Davao City's youth through intentional community projects, educational hubs, and sustainable livelihood ventures.</p>
+        <button class="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 w-fit transition-all active:scale-95">
+          View All Projects <span class="msym">keyboard_arrow_down</span>
+        </button>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden h-64">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="" class="w-full h-full object-cover"/>
+        <div class="absolute bottom-4 left-4 bg-secondary-container rounded-xl px-4 py-3">
+          <div class="text-xs font-bold text-on-secondary-container/70">Active Projects</div>
+          <div class="font-headline text-xl font-black text-on-secondary-container">12+ this Quarter</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured -->
+    <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient mb-12">
+      <div class="grid md:grid-cols-2">
+        <div class="h-64 md:h-auto overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="" class="w-full h-full object-cover"/>
+        </div>
+        <div class="p-8 flex flex-col justify-center">
+          <div class="flex gap-2 mb-4">
+            <span class="text-xs font-bold text-primary">★ Featured Project</span>
+            <span class="badge tag-ongoing">Ongoing</span>
+          </div>
+          <h2 class="font-headline text-3xl font-black mb-4">Digital Literacy Hub</h2>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-5">Bridging the digital divide in Tibungco. Our hub provides free access to high-speed internet, premium design software, and expert-led coding bootcamps for out-of-school youth and students.</p>
+          <div class="flex gap-4 text-sm mb-5">
+            <span class="flex items-center gap-1 text-primary font-semibold"><span class="msym text-base fill">check_circle</span> 50+ Graduates</span>
+            <span class="flex items-center gap-1 text-primary font-semibold"><span class="msym text-base fill">check_circle</span> Modern Workstations</span>
+          </div>
+          <button class="btn-secondary w-fit px-5 py-2 rounded-xl font-bold text-sm flex items-center gap-2">
+            Explore Hub Details <span class="msym text-sm">open_in_new</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="font-headline text-2xl font-black">Explore Categories</h2>
+        <p class="text-on-surface-variant text-sm mt-1">Filter initiatives that resonate with your passions.</p>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        <button class="filter-btn active" onclick="filterPrograms(this,'all')">All</button>
+        <button class="filter-btn" onclick="filterPrograms(this,'education')">Education</button>
+        <button class="filter-btn" onclick="filterPrograms(this,'environment')">Environment</button>
+        <button class="filter-btn" onclick="filterPrograms(this,'livelihood')">Livelihood</button>
+        <button class="filter-btn" onclick="filterPrograms(this,'sports')">Sports</button>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5 mb-14" id="programs-grid">
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-pcat="environment">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1441260038675-7329ab4cc264?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-upcoming absolute top-3 right-3">Upcoming</span><div class="absolute top-3 left-3 w-7 h-7 bg-white rounded-full flex items-center justify-center"><span class="msym text-sm" style="color:#3b6d11">park</span></div></div>
+        <div class="p-5"><h3 class="font-headline font-bold mb-2">Green Tibungco</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Tree planting and urban gardening initiative aimed at creating a sustainable, climate-resilient barangay.</p><div class="text-xs text-on-surface-variant mb-3">Starts Oct 2024</div><button class="text-primary text-xs font-bold flex items-center gap-1">Learn More <span class="msym text-sm">arrow_forward</span></button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-pcat="sports">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1546519638405-a9d1a97e0cc4?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-ongoing absolute top-3 right-3">Ongoing</span><div class="absolute top-3 left-3 w-7 h-7 bg-white rounded-full flex items-center justify-center"><span class="msym text-sm text-primary">sports_basketball</span></div></div>
+        <div class="p-5"><h3 class="font-headline font-bold mb-2">Tiburcio Cup</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Our annual sports festival promoting teamwork, discipline, and healthy lifestyles through various athletic events.</p><div class="text-xs text-on-surface-variant mb-3">Ends Sept 2024</div><button class="text-primary text-xs font-bold flex items-center gap-1">Learn More <span class="msym text-sm">arrow_forward</span></button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-pcat="education">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge" style="background:#f1efe8;color:#5f5e5a;position:absolute;top:12px;right:12px;">Completed</span><div class="absolute top-3 left-3 w-7 h-7 bg-white rounded-full flex items-center justify-center"><span class="msym text-sm text-tertiary">memory</span></div></div>
+        <div class="p-5"><h3 class="font-headline font-bold mb-2">Future Skills</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Intensive vocational training program focusing on high-demand skills like graphic design, customer service.</p><div class="text-xs text-on-surface-variant mb-3">Last Batch: July 2024</div><button class="text-primary text-xs font-bold flex items-center gap-1">Learn More <span class="msym text-sm">arrow_forward</span></button></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-ambient card-lift" data-pcat="livelihood">
+        <div class="relative h-44"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80" class="w-full h-full object-cover" alt=""/><span class="badge tag-upcoming absolute top-3 right-3">Upcoming</span><div class="absolute top-3 left-3 w-7 h-7 bg-white rounded-full flex items-center justify-center"><span class="msym text-sm" style="color:#3b6d11">agriculture</span></div></div>
+        <div class="p-5"><h3 class="font-headline font-bold mb-2">Youth Agri-Venture</h3><p class="text-on-surface-variant text-xs leading-relaxed mb-3">Empowering young agri-preneurs through seed funding and mentorship in modern farming techniques.</p><div class="text-xs text-on-surface-variant mb-3">Batch 3: Jan 2025</div><button class="text-primary text-xs font-bold flex items-center gap-1">Learn More <span class="msym text-sm">arrow_forward</span></button></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-primary rounded-2xl p-10 relative overflow-hidden">
+      <div class="grid md:grid-cols-2 items-center gap-6">
+        <div>
+          <h2 class="font-headline text-3xl font-black text-white mb-3">Be the Pulse of Your Community.</h2>
+          <p class="text-white/80 text-sm mb-6">Have a brilliant idea for a community project? Or simply want to volunteer your time? Join us and let's build Tibungco's future together.</p>
+          <div class="flex gap-3 flex-wrap">
+            <button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-all">Pitch a Program</button>
+            <button class="border-2 border-white/40 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-white/10">Volunteer Now</button>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <div class="w-28 h-28 bg-secondary-container rounded-full flex items-center justify-center">
+            <span class="msym fill text-on-secondary-container text-5xl">volunteer_activism</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================== REPORTS PAGE ======================== -->
+<div id="page-reports" class="page">
+  <main class="pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div class="mb-10">
+      <div class="badge tag-civic mb-3">The Civic Pulse</div>
+      <h1 class="font-headline text-4xl md:text-5xl font-black mb-3" style="letter-spacing:-0.02em">
+        Accomplishments<br/><span class="text-primary">&amp; Transparency Report:</span> Barangay Tibungco
+      </h1>
+      <p class="text-on-surface-variant text-sm max-w-xl">Empowering the youth through radical accountability. View our real-time project progress, fiscal allocations, and official documentation for FY 2024.</p>
+    </div>
+
+    <!-- Stats + Budget -->
+    <div class="grid md:grid-cols-3 gap-5 mb-10">
+      <div class="md:col-span-2 bg-surface-container-lowest rounded-2xl p-7 shadow-ambient">
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <h3 class="font-headline font-bold">Budget Transparency</h3>
+            <div class="text-xs text-on-surface-variant">Allocated vs. Utilized Funds (PHP)</div>
+          </div>
+          <span class="msym text-primary text-2xl">account_balance_wallet</span>
+        </div>
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between text-sm mb-2"><span class="font-semibold">Youth Development Programs</span><span class="text-primary font-bold">85% Utilized</span></div>
+            <div class="progress-bar"><div class="progress-fill bg-primary" style="width:85%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-2"><span class="font-semibold">Educational Assistance &amp; Grants</span><span class="text-tertiary font-bold">62% Utilized</span></div>
+            <div class="progress-bar"><div class="progress-fill bg-tertiary" style="width:62%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-2"><span class="font-semibold">Community Infrastructure</span><span class="font-bold" style="color:#705d00">40% Utilized</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:40%;background:#705d00"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="bg-secondary-container rounded-2xl p-6 flex-1 flex flex-col justify-between">
+          <span class="msym fill text-on-secondary-container text-3xl">groups</span>
+          <div>
+            <div class="stat-num text-4xl text-on-secondary-container">12,480+</div>
+            <div class="text-on-secondary-container/70 text-sm font-semibold">Youth Lives Impacted</div>
+          </div>
+        </div>
+        <div class="bg-primary rounded-2xl p-6 flex-1 flex flex-col justify-between text-white">
+          <span class="msym fill text-white text-3xl">verified</span>
+          <div>
+            <div class="stat-num text-4xl text-white">100%</div>
+            <div class="text-white/70 text-sm font-semibold">Audit Compliance Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Timeline -->
+    <div class="bg-surface-container-lowest rounded-2xl p-7 shadow-ambient mb-8">
+      <h3 class="font-headline font-bold text-lg mb-6">Active Project Timeline</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-headline font-bold text-sm">Digital Literacy Hub</span>
+            <span class="badge tag-education">Phase 3</span>
+          </div>
+          <div class="timeline-bar mb-2"><div class="timeline-fill" style="width:70%"></div></div>
+          <p class="text-xs text-on-surface-variant mb-2">Procurement of high-end workstations and fiber installation in 5 districts.</p>
+          <div class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="msym text-sm">calendar_today</span>Target: Dec 2024</div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-headline font-bold text-sm">Youth Agri-Venture</span>
+            <span class="badge tag-ongoing">Ongoing</span>
+          </div>
+          <div class="timeline-bar mb-2"><div class="timeline-fill" style="width:45%"></div></div>
+          <p class="text-xs text-on-surface-variant mb-2">Hydroponic farm setup and entrepreneurial training for 50 young farmers.</p>
+          <div class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="msym text-sm">calendar_today</span>Target: March 2025</div>
+        </div>
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-headline font-bold text-sm">Mental Health Caravan</span>
+            <span class="badge tag-near">Near Completion</span>
+          </div>
+          <div class="timeline-bar mb-2"><div class="timeline-fill" style="width:88%"></div></div>
+          <p class="text-xs text-on-surface-variant mb-2">Final seminar series across all barangays. Deployment of support hotlines.</p>
+          <div class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="msym text-sm">calendar_today</span>Target: Oct 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents -->
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="font-headline font-bold text-lg">Official Transparency Documents</h3>
+      <button class="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">View All Archives <span class="msym text-base">arrow_forward</span></button>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-surface-container-lowest rounded-xl p-5 shadow-ambient card-lift">
+        <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center mb-4"><span class="msym" style="color:#ba1a1a">picture_as_pdf</span></div>
+        <h4 class="font-headline font-bold text-sm mb-1">Q3 Financial Disclosure</h4>
+        <p class="text-xs text-on-surface-variant mb-3">Detailed breakdown of operational expenses.</p>
+        <button class="text-primary text-xs font-bold flex items-center gap-1"><span class="msym text-sm">download</span> Download PDF</button>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl p-5 shadow-ambient card-lift">
+        <div class="w-10 h-10 bg-surface-container-low rounded-xl flex items-center justify-center mb-4"><span class="msym text-tertiary">description</span></div>
+        <h4 class="font-headline font-bold text-sm mb-1">Annual Progress Report</h4>
+        <p class="text-xs text-on-surface-variant mb-3">Comprehensive review of 2023-2024 projects.</p>
+        <button class="text-primary text-xs font-bold flex items-center gap-1"><span class="msym text-sm">download</span> Download PDF</button>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl p-5 shadow-ambient card-lift">
+        <div class="w-10 h-10 bg-surface-container rounded-xl flex items-center justify-center mb-4"><span class="msym" style="color:#705d00">table_chart</span></div>
+        <h4 class="font-headline font-bold text-sm mb-1">Budget Utilization Plan</h4>
+        <p class="text-xs text-on-surface-variant mb-3">Strategic allocations for the upcoming term.</p>
+        <button class="text-primary text-xs font-bold flex items-center gap-1"><span class="msym text-sm">download</span> Download PDF</button>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl p-5 shadow-ambient card-lift">
+        <div class="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center mb-4"><span class="msym text-on-secondary-container">policy</span></div>
+        <h4 class="font-headline font-bold text-sm mb-1">Code of Conduct</h4>
+        <p class="text-xs text-on-surface-variant mb-3">Ethical guidelines for youth leaders.</p>
+        <button class="text-primary text-xs font-bold flex items-center gap-1"><span class="msym text-sm">download</span> Download PDF</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="bg-slate-50 border-t border-slate-100 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <svg width="28" height="28" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#00685b"/><path d="M10 26 L18 10 L26 26 Z" fill="white" opacity="0.9"/><circle cx="18" cy="20" r="4" fill="#fcd400"/></svg>
+        <span class="brand font-black text-primary">SK TIBUNGCO</span>
+      </div>
+      <p class="text-slate-500 text-xs leading-relaxed mb-4">Empowering the youth of Barangay Tibungco through innovation, service, and digital connection.</p>
+      <div class="flex gap-3">
+        <span class="msym text-slate-400 hover:text-primary cursor-pointer">share</span>
+        <span class="msym text-slate-400 hover:text-primary cursor-pointer">language</span>
+        <span class="msym text-slate-400 hover:text-primary cursor-pointer">alternate_email</span>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-3 text-on-surface">Quick Links</h4>
+      <ul class="space-y-2">
+        <li><span class="text-slate-500 hover:text-primary cursor-pointer transition-colors" onclick="showPage('home')">About Us</span></li>
+        <li><span class="text-slate-500 hover:text-primary cursor-pointer transition-colors" onclick="showPage('services')">Services</span></li>
+        <li><span class="text-slate-500 hover:text-primary cursor-pointer transition-colors">Privacy Policy</span></li>
+        <li><span class="text-slate-500 hover:text-primary cursor-pointer transition-colors">Terms of Service</span></li>
+        <li><span class="text-slate-500 hover:text-primary cursor-pointer transition-colors">Contact Us</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-3 text-on-surface">Government</h4>
+      <ul class="space-y-2">
+        <li><a class="text-slate-500 hover:text-primary transition-colors" href="#">Official Gazette</a></li>
+        <li><a class="text-slate-500 hover:text-primary transition-colors" href="#">Davao City Portal</a></li>
+        <li><a class="text-slate-500 hover:text-primary transition-colors" href="#">NYC Philippines</a></li>
+        <li><a class="text-slate-500 hover:text-primary transition-colors" href="#">DILG Philippines</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-headline font-bold mb-3 text-on-surface">Contact</h4>
+      <p class="text-slate-500 text-xs mb-1">Barangay Hall, Tibungco<br/>Davao City, 8000</p>
+      <p class="text-xs text-primary mb-4">sk.tibungco@davaocity.gov.ph</p>
+      <div class="flex gap-2">
+        <input type="email" class="input-field flex-1 text-xs py-2" placeholder="Your email"/>
+        <button class="btn-primary p-2 rounded-lg"><span class="msym text-sm">send</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-slate-100 py-5 text-center text-xs text-slate-400">
+    © 2024 SK Connect Davao City: The Civic Pulse.
+  </div>
+</footer>
+
+<!-- Action Float -->
+<div class="fixed bottom-6 right-6 z-40">
+  <button class="bg-secondary-container text-on-secondary-container shadow-2xl px-4 py-3 rounded-full flex items-center gap-2 hover:scale-105 active:scale-95 transition-all font-bold text-sm">
+    <span class="msym font-bold">chat_bubble</span> Quick Connect
+  </button>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) { page.classList.add('active'); page.classList.add('animate-in'); }
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const map = { home:'nav-home', services:'nav-services', docrequest:'nav-services', events:'nav-events', programs:'nav-programs', reports:'nav-reports' };
+  const navEl = document.getElementById(map[id]);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobile() {
+  const m = document.getElementById('mobile-nav');
+  m.classList.toggle('hidden');
+}
+
+function filterEvents(btn, cat) {
+  document.querySelectorAll('#events-grid [data-cat]').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.cat === cat) ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function filterPrograms(btn, cat) {
+  document.querySelectorAll('#programs-grid [data-pcat]').forEach(c => {
+    c.style.display = (cat === 'all' || c.dataset.pcat === cat) ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Set initial active nav
+document.getElementById('nav-home').classList.add('active');
+</script>
+</body>
+</html>

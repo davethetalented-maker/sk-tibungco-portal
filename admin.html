@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SK Tibungco Admin Console</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-900">
+  <div class="max-w-6xl mx-auto p-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-black text-teal-800">SK Tibungco Admin Console</h1>
+      <p class="text-sm text-slate-600 mt-2">Review document requests, registrations, and complaints. Update request statuses and send email/SMS notifications.</p>
+    </header>
+
+    <section class="mb-8 bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+        <div>
+          <h2 class="font-bold text-lg">Recent Document Requests</h2>
+          <p class="text-sm text-slate-500">Auto-refreshes when you update status.</p>
+        </div>
+        <button id="refresh-btn" onclick="loadRequests()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-700 text-white text-sm hover:bg-teal-600">Refresh</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-left text-sm">
+          <thead class="bg-teal-100 text-teal-900">
+            <tr>
+              <th class="px-4 py-3">Tracking</th>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Document</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3">Contact</th>
+              <th class="px-4 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody id="requests-body" class="bg-white"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
+      <h2 class="font-bold text-lg mb-4">Update Request Status</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-2">Tracking Number</label>
+          <input id="admin-tracking" type="text" class="w-full input-f rounded-xl border border-slate-200 px-4 py-3" placeholder="TIB-2025-123456" />
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-2">New Status</label>
+          <select id="admin-status" class="w-full input-f rounded-xl border border-slate-200 px-4 py-3">
+            <option>Received</option>
+            <option>Processing</option>
+            <option>Ready</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-2">Note (optional)</label>
+          <input id="admin-note" type="text" class="w-full input-f rounded-xl border border-slate-200 px-4 py-3" placeholder="E.g. Ready for pickup on April 10" />
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <button onclick="updateStatus()" class="inline-flex items-center justify-center gap-2 rounded-full bg-teal-700 px-5 py-3 text-sm font-semibold text-white hover:bg-teal-600">Send Update</button>
+        <span id="admin-feedback" class="text-sm text-slate-600"></span>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    async function loadRequests() {
+      const body = document.getElementById('requests-body');
+      body.innerHTML = '<tr><td colspan="6" class="px-4 py-4 text-sm text-slate-500">Loading...</td></tr>';
+      try {
+        const response = await fetch('/api/requests');
+        const data = await response.json();
+        const requests = data.requests || [];
+        if (!requests.length) {
+          body.innerHTML = '<tr><td colspan="6" class="px-4 py-4 text-sm text-slate-500">No document requests yet.</td></tr>';
+          return;
+        }
+        body.innerHTML = requests.map(item => {
+          const badge = {
+            Received: 'bg-amber-100 text-amber-800',
+            Processing: 'bg-sky-100 text-sky-800',
+            Ready: 'bg-emerald-100 text-emerald-800',
+            Cancelled: 'bg-red-100 text-red-800'
+          }[item.status] || 'bg-slate-100 text-slate-800';
+          return `
+            <tr class="border-t border-slate-200">
+              <td class="px-4 py-3 font-semibold text-slate-700">${item.trackingNo}</td>
+              <td class="px-4 py-3">${item.firstname} ${item.lastname}</td>
+              <td class="px-4 py-3">${item.docType}</td>
+              <td class="px-4 py-3"><span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${badge}">${item.status}</span></td>
+              <td class="px-4 py-3">${item.email || item.contactNumber || '—'}</td>
+              <td class="px-4 py-3"><button onclick="selectRequest('${item.trackingNo}')" class="text-teal-700 underline">Select</button></td>
+            </tr>
+          `;
+        }).join('');
+      } catch (error) {
+        body.innerHTML = `<tr><td colspan="6" class="px-4 py-4 text-sm text-red-600">Unable to load requests.</td></tr>`;
+      }
+    }
+
+    function selectRequest(trackingNo) {
+      document.getElementById('admin-tracking').value = trackingNo;
+      document.getElementById('admin-feedback').textContent = `Selected ${trackingNo}`;
+    }
+
+    async function updateStatus() {
+      const trackingNo = document.getElementById('admin-tracking').value.trim();
+      const status = document.getElementById('admin-status').value;
+      const note = document.getElementById('admin-note').value;
+      const feedback = document.getElementById('admin-feedback');
+      if (!trackingNo) {
+        feedback.textContent = 'Enter a tracking number first.';
+        return;
+      }
+      try {
+        const response = await fetch(`/api/requests/${encodeURIComponent(trackingNo)}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status, note })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || 'Update failed.');
+        feedback.textContent = `Status updated to ${data.status}. Email/SMS notifications sent.`;
+        loadRequests();
+      } catch (error) {
+        feedback.textContent = error.message;
+      }
+    }
+
+    loadRequests();
+  </script>
+</body>
+</html>
